@@ -2,13 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 // const bodyParser = require("body-parser");
-// const adminroutes = require("./routes/adminroute");
-// const superadminroutes = require("./routes/superadmin");
-// const hoteldetails = require("./routes/hotel");
-// const Fooddetail = require("./routes/Fooditem");
-// const userdetaiils = require("./routes/user");
+const adminroutes = require("./routes/adminroute");
+const superadminroutes = require("./routes/superadmin");
+const hoteldetails = require("./routes/hotel");
+const Fooddetail = require("./routes/Fooditem");
+const userdetaiils = require("./routes/user");
 
-// const categoryupload = require("./routes/categoryroute");
+const categoryupload = require("./routes/categoryroute");
 
 const app = express();
 
@@ -34,12 +34,12 @@ app.use(express.urlencoded({ limit: "20mb", extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 //routes
-// app.use("/admin", adminroutes);
-// app.use("/superadmin", superadminroutes);
-// app.use("/hotel", hoteldetails);
-// app.use("/food", Fooddetail);
-// app.use("/user", userdetaiils);
-// app.use("/category", categoryupload);
+app.use("/admin", adminroutes);
+app.use("/superadmin", superadminroutes);
+app.use("/hotel", hoteldetails);
+app.use("/food", Fooddetail);
+app.use("/user", userdetaiils);
+app.use("/category", categoryupload);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Dineease API");
