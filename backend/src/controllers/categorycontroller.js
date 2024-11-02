@@ -8,8 +8,8 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir =
       file.fieldname === "categoryphoto"
-        ? "uploads/categories/category"
-        : "uploads/categories/subcategory";
+        ? "/uploads/categories/category"
+        : "/uploads/categories/subcategory";
     cb(null, dir);
   },
   filename: (req, file, cb) => {
