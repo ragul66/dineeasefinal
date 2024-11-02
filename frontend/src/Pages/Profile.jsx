@@ -22,7 +22,7 @@ const ProfilePage = () => {
     const fetchPendingAdmins = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}/admin/admininfo/${userId}`
+          `${import.meta.env.VITE_API}admin/admininfo/${userId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch admin data");

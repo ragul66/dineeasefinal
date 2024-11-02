@@ -17,7 +17,7 @@ const AddOrDisplayHotel = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `${import.meta.env.VITE_API}/hotel/admin-hotels/${userId}`
+          `${import.meta.env.VITE_API}hotel/admin-hotels/${userId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch hotels");
@@ -58,7 +58,7 @@ const AddOrDisplayHotel = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/hotel/add-hotel/${userId}`,
+        `${import.meta.env.VITE_API}hotel/add-hotel/${userId}`,
         {
           method: "POST",
           body: formData,

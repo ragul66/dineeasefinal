@@ -50,7 +50,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/admin/admininfo`,
+        `${import.meta.env.VITE_API}admin/admininfo`,
         {
           method: "POST",
           body: data,

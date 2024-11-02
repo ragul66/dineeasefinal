@@ -52,7 +52,7 @@ function Fooditems() {
   // Fetch categories
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API}/category`);
+      const response = await fetch(`${import.meta.env.VITE_API}category`);
       if (!response.ok) throw new Error("Failed to fetch categories");
 
       const data = await response.json();
@@ -88,7 +88,7 @@ function Fooditems() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/food/fooditems/${userId}`
+        `${import.meta.env.VITE_API}food/fooditems/${userId}`
       );
       if (!response.ok) throw new Error("Failed to fetch food items");
 
