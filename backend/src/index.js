@@ -49,8 +49,6 @@ const start = async () => {
   try {
     await mongoose.connect(CONNECTION, {
       dbName: "dineease",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
 
