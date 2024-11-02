@@ -10,13 +10,13 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Determine folder based on field name
     if (file.fieldname === "hotelPhotos") {
-      cb(null, "/uploads/hotels/");
+      cb(null, "uploads/hotels/");
     } else if (file.fieldname === "FssaicertificateImage") {
-      cb(null, "/uploads/fssaicertificateimage/");
+      cb(null, "uploads/fssaicertificateimage/");
     } else if (file.fieldname === "nocImage") {
-      cb(null, "/uploads/nocimage/");
+      cb(null, "uploads/nocimage/");
     } else if (file.fieldname === "HTLcertificate") {
-      cb(null, "/uploads/HTLcertificate/");
+      cb(null, "uploads/HTLcertificate/");
     } else {
       cb(null, "/uploads/");
     }
