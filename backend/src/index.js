@@ -9,6 +9,7 @@ const Fooddetail = require("./routes/Fooditem");
 const userdetaiils = require("./routes/user");
 
 const categoryupload = require("./routes/categoryroute");
+const path = require("path");
 
 const app = express();
 
