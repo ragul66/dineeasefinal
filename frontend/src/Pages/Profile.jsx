@@ -86,7 +86,7 @@ const ProfilePage = () => {
               <div className="relative">
                 <div className="w-32 h-32 rounded-full overflow-hidden ring-4 ring-white shadow-lg">
                   <img
-                    src={`http://localhost:3000/${Admins.ownerphoto}`}
+                    src={`${import.meta.env.VITE_API}/${Admins.ownerphoto}`}
                     alt="Admin"
                     className="w-full h-full object-cover"
                   />
