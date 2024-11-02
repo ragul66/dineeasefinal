@@ -46,27 +46,39 @@ const getCategoryById = async (req, res) => {
 
 // POST a new category
 const createCategory = [
-  upload.fields([{ name: "categoryphoto" }, { name: "subcategoryphoto" }]),
+  upload.fields([
+    { name: "categoryphoto", maxCount: 1 },
+    { name: "subcategoryphoto", maxCount: 10 }, // Adjust maxCount as needed
+  ]),
   async (req, res) => {
     try {
-      const { category, subcategory } = req.body;
+      const { category, subcategories } = req.body;
+
+      // Get category photo path
       const categoryphoto = req.files["categoryphoto"]
         ? req.files["categoryphoto"][0].path
         : null;
-      const subcategoryphoto = req.files["subcategoryphoto"]
-        ? req.files["subcategoryphoto"][0].path
-        : null;
 
+      // Parse subcategories JSON and match each with the uploaded images
+      const subcategoryData = JSON.parse(subcategories).map((sub, index) => ({
+        name: sub.name,
+        photo:
+          req.files["subcategoryphoto"] && req.files["subcategoryphoto"][index]
+            ? req.files["subcategoryphoto"][index].path
+            : null,
+      }));
+
+      // Create new category document
       const newCategory = new Category({
         category,
         categoryphoto,
-        subcategory,
-        subcategoryphoto,
+        subcategories: subcategoryData,
       });
 
       await newCategory.save();
       res.status(201).json(newCategory);
     } catch (error) {
+      console.error("Error creating category:", error);
       res.status(500).json({ error: "Error creating category" });
     }
   },
