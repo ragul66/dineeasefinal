@@ -3,13 +3,13 @@ import React from "react";
 const Login = () => {
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center p-2"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center p-2 font-primary"
       style={{
         backgroundImage: "url('../src/assets/Admin Back1.jpg')",
       }}
     >
       <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md ">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
           Welcome to DineNow!!
         </h2>
         <form className="space-y-4">

@@ -52,12 +52,14 @@ const Navbar = () => {
   const isActive = (text) => activePage === text;
 
   return (
-    <nav className="bg-orange-400  text-white shadow-lg">
+    <nav className="bg-white  text-gray-600 shadow-lg font-primary">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo and brand */}
           <div className="flex-shrink-0 flex items-center">
-            <span className="text-xl font-bold">SuperAdmin</span>
+            <span className="text-xl font-bold text-indigo-600">
+              SuperAdmin
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -70,8 +72,8 @@ const Navbar = () => {
                 className={`flex items-center space-x-1 px-3 py-2 rounded-md transition-colors duration-200
                   ${
                     isActive(item.text)
-                      ? "bg-white text-black"
-                      : "text-white hover:bg-blue-500 hover:text-white"
+                      ? "bg-indigo-100 text-indigo-700"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                   }`}
               >
                 <item.icon
@@ -84,7 +86,7 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center bg-white rounded-lg px-3 py-1">
+          <div className="hidden md:flex items-center bg-white border-2 border-black rounded-lg px-3 py-1">
             <Search size={18} className="text-black" />
             <input
               type="text"
@@ -126,7 +128,7 @@ const Navbar = () => {
           <div className="md:hidden py-4">
             <div className="flex flex-col space-y-4">
               {/* Mobile Search */}
-              <div className="flex items-center bg-indigo-500 rounded-lg px-3 py-2">
+              <div className="flex items-center bg-white borer-2 border-black rounded-lg px-3 py-2">
                 <Search size={18} className="text-indigo-200" />
                 <input
                   type="text"
@@ -144,8 +146,8 @@ const Navbar = () => {
                   className={`flex items-center space-x-2 px-2 py-2 rounded-md transition-colors duration-200
                     ${
                       isActive(item.text)
-                        ? "bg-indigo-700 text-white"
-                        : "text-white hover:bg-indigo-500 hover:text-white"
+                        ? "bg-indigo-100 text-indigo-700"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                     }`}
                 >
                   <item.icon

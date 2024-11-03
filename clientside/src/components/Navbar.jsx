@@ -1,119 +1,145 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { MenuIcon, XIcon, SearchIcon } from "@heroicons/react/outline";
+import {
+  Menu,
+  X,
+  User,
+  Search,
+  ShoppingBag,
+  Home,
+  CalendarCheck,
+  UtensilsCrossed,
+  Image,
+  Info,
+  Phone,
+  Star,
+} from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom"; // Import NavLink and useLocation
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation(); // Get the current location
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Bookings", path: "/bookings" },
-    { name: "Menu", path: "/menu" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+  const menuItems = [
+    { label: "Home", path: "/", icon: Home },
+    { label: "Book Now", path: "/booking", icon: CalendarCheck },
+    { label: "Restaurants", path: "/restaurants", icon: UtensilsCrossed },
+    { label: "Special Events", path: "/events", icon: Star }, // Updated icon
+    { label: "Gallery", path: "/gallery", icon: Image },
+    { label: "About Us", path: "/about", icon: Info },
+    { label: "Contact", path: "/contact", icon: Phone },
   ];
 
   return (
-    <header className="bg-orange-400 text-white shadow-lg">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center lg:border-b-0 border-b-2 border-gray-400">
-        {/* Logo and Company Name */}
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 flex items-center rounded-full">
-            <img
-              className="rounded-lg"
-              src="../src/assets/Admin Back1.jpg"
-              alt="Dineease Logo"
-            />
-          </div>
-          <NavLink to="/" className="text-2xl font-bold text-white">
-            Dineease
-          </NavLink>
-        </div>
-
-        {/* Desktop Search Bar (hidden on mobile) */}
-        <div className="hidden md:flex flex-grow items-center mx-8">
-          <div className="relative w-full max-w-md">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full py-2 pl-10 pr-4 rounded-md text-gray-800"
-            />
-            <SearchIcon className="absolute left-3 top-2 w-5 h-5 text-gray-500" />
-          </div>
-        </div>
-
-        {/* Mobile Search Bar (visible on mobile only) */}
-        <div className="flex items-center md:hidden">
-          <div className="relative mr-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="py-2 pl-10 pr-4 rounded-md text-gray-800 w-40"
-            />
-            <SearchIcon className="absolute left-3 top-2 w-5 h-5 text-gray-500" />
+    <nav className="bg-white shadow-md font-primary">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0 flex items-center">
+            <span className="text-2xl font-bold text-indigo-600">Dineease</span>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={toggleMenu}
-            className="text-gray-300 focus:outline-none"
-          >
-            {isOpen ? (
-              <XIcon className="w-6 h-6" />
-            ) : (
-              <MenuIcon className="w-6 h-6" />
-            )}
-          </button>
-        </div>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-6">
+            {menuItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 group ${
+                      isActive
+                        ? "text-blue-600 bg-gray-100"
+                        : "text-gray-600 hover:text-blue-600"
+                    }`
+                  }
+                >
+                  <IconComponent className="h-4 w-4 group-hover:scale-110 transition-transform duration-200" />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
+          </div>
 
-        {/* Desktop Links */}
-        <nav className="hidden md:flex space-x-4">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `px-4 py-2 font-medium rounded-md transition ${
-                  isActive
-                    ? "text-white border-b-2 border-white"
-                    : "text-gray-300 hover:text-white"
-                }`
-              }
+          {/* Right side icons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
+              <Search className="h-5 w-5 text-gray-600" />
+            </button>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
+              <User className="h-5 w-5 text-gray-600" />
+            </button>
+            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
+              <ShoppingBag className="h-5 w-5 text-gray-600" />
+              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                0
+              </span>
+            </button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:bg-gray-100 transition-colors duration-200"
             >
-              {link.name}
-            </NavLink>
-          ))}
-        </nav>
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Links */}
-      {isOpen && (
-        <nav className="md:hidden bg-orange-400">
-          <div className="container mx-auto px-4 py-2 flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                onClick={toggleMenu}
-                className={({ isActive }) =>
-                  `block px-4 py-2 font-medium rounded-md transition ${
-                    isActive
-                      ? "text-white border-b-2 border-white w-fit"
-                      : "text-gray-300 hover:text-white"
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {menuItems.map((item) => {
+              const IconComponent = item.icon;
+              return (
+                <NavLink
+                  key={item.label}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                      isActive
+                        ? "text-blue-600 bg-gray-100"
+                        : "text-gray-600 hover:text-blue-600 hover:bg-gray-100"
+                    }`
+                  }
+                >
+                  <IconComponent className="h-5 w-5" />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
           </div>
-        </nav>
+          {/* Mobile icons */}
+          <div className="px-4 py-3 border-t border-gray-200">
+            <div className="flex items-center justify-around">
+              <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200">
+                <Search className="h-5 w-5 text-gray-600" />
+                <span className="text-xs text-gray-600">Search</span>
+              </button>
+              <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200">
+                <User className="h-5 w-5 text-gray-600" />
+                <span className="text-xs text-gray-600">Profile</span>
+              </button>
+              <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200 relative">
+                <ShoppingBag className="h-5 w-5 text-gray-600" />
+                <span className="text-xs text-gray-600">Bookings</span>
+                <span className="absolute -top-1 right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
+                  0
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
-    </header>
+    </nav>
   );
 };
 
