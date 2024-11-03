@@ -234,7 +234,7 @@ const AddOrDisplayHotel = () => {
                   {hotel.hotelPhotos.map((photo, index) => (
                     <img
                       key={index}
-                      src={`${import.meta.env.VITE_API}/${photo}`}
+                      src={`${import.meta.env.VITE_API}${photo}`}
                       alt={`Hotel ${hotel.hotelName} - Photo ${index + 1}`}
                       className="w-full h-48 object-cover rounded-lg shadow-md"
                     />
@@ -250,7 +250,7 @@ const AddOrDisplayHotel = () => {
                       </p>
                       {hotel.FssaicertificateImage ? (
                         <img
-                          src={`${import.meta.env.VITE_API}/${
+                          src={`${import.meta.env.VITE_API}${
                             hotel.FssaicertificateImage
                           }`}
                           alt="FSSAI Certificate"
@@ -268,7 +268,7 @@ const AddOrDisplayHotel = () => {
                       <p className="font-semibold text-gray-700">NOC Image</p>
                       {hotel.nocImage ? (
                         <img
-                          src={`${import.meta.env.VITE_API}/${hotel.nocImage}`}
+                          src={`${import.meta.env.VITE_API}${hotel.nocImage}`}
                           alt="NOC"
                           className="mt-2 rounded-lg shadow-md w-32 h-32 object-cover"
                         />
@@ -286,7 +286,7 @@ const AddOrDisplayHotel = () => {
                       </p>
                       {hotel.HTLcertificate ? (
                         <img
-                          src={`${import.meta.env.VITE_API}/${
+                          src={`${import.meta.env.VITE_API}${
                             hotel.HTLcertificate
                           }`}
                           alt="HTL Certificate"

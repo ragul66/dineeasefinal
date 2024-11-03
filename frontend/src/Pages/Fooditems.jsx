@@ -290,12 +290,12 @@ function Fooditems() {
           <tbody>
             {foodItems.map((item) => (
               <tr key={item._id}>
-                <td className="px-4 py-2">{item.foodname}</td>
-                <td className="px-4 py-2">{item.description}</td>
-                <td className="px-4 py-2">{item.price}</td>
-                <td className="px-4 py-2">{item.timing}</td>
-                <td className="px-4 py-2">{item.category}</td>
-                <td className="px-4 py-2">{item.subcategory}</td>
+                <td className="px-4 py-2 border-r-2">{item.foodname}</td>
+                <td className="px-4 py-2 border-r-2">{item.description}</td>
+                <td className="px-4 py-2 border-r-2">{item.price}</td>
+                <td className="px-4 py-2 border-r-2">{item.timing}</td>
+                <td className="px-4 py-2 border-r-2">{item.category}</td>
+                <td className="px-4 py-2 border-r-2">{item.subcategory}</td>
                 <td className="px-4 py-2 flex items-center space-x-2">
                   <button
                     onClick={() =>
