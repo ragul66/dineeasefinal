@@ -17,7 +17,7 @@ const Dashboard = () => {
       try {
         // Fetch user data to get the hotelId
         const response = await fetch(
-          `${import.meta.env.VITE_API}/admin/admininfo/${userId}`
+          `${import.meta.env.VITE_API}admin/admininfo/${userId}`
         );
         const data = await response.json();
         // console.log(data);
@@ -42,7 +42,7 @@ const Dashboard = () => {
     const fetchHotelData = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}/hotel/admin-hotels/${userId}`
+          `${import.meta.env.VITE_API}hotel/admin-hotels/${userId}`
         );
         const hotel = await response.json();
         console.log(hotel);
