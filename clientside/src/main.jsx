@@ -8,6 +8,8 @@ import Layout from "./components/Layout";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
+import RestaurantsList from "./Pages/Restaurants";
+import RestaurantDetail from "./components/RestaurantDetail";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/restaurants",
+        element: <RestaurantsList />,
+      },
+      {
+        path: "/restaurantdetails",
+        element: <RestaurantDetail />,
       },
     ],
   },
