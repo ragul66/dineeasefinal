@@ -199,11 +199,11 @@ const HomePage = () => {
 
             <div
               ref={scrollRef}
-              className="flex overflow-x-hidden gap-4 scroll-smooth pb-4"
+              className="flex overflow-x-hidden gap-2 scroll-smooth pb-4"
             >
               {categories.map((category) => (
-                <div key={category.id} className="flex-none w-72">
-                  <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <div key={category.id} className="flex-none w-28 lg:w-64 p-4">
+                  <div className="bg-white rounded-full shadow-sm overflow-hidden w-28">
                     <div
                       className="relative cursor-pointer group"
                       onClick={() =>
@@ -215,7 +215,7 @@ const HomePage = () => {
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="w-28 h-28 object-cover transition-transform duration-300 group-hover:scale-105 rounded-full"
                       />
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center">
                         <h3 className="text-white text-xl font-semibold">
@@ -250,17 +250,17 @@ const HomePage = () => {
               openCategory === category.id && (
                 <div
                   key={`sub-${category.id}`}
-                  className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 animate-fadeIn"
+                  className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 animate-fadeIn "
                 >
                   {category.subcategories.map((sub, index) => (
                     <div
                       key={index}
-                      className="relative group cursor-pointer overflow-hidden rounded-lg shadow-sm"
+                      className="relative group cursor-pointer overflow-hidden rounded-full w-40 h-40 shadow-sm"
                     >
                       <img
                         src={sub.image}
                         alt={sub.name}
-                        className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-110"
+                        className="w-28 h-28 rounded-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                         <span className="text-white font-medium">
