@@ -20,7 +20,7 @@ const Navbar = () => {
   const location = useLocation(); // Get the current location
 
   const menuItems = [
-    { label: "Home", path: "/", icon: Home },
+    { label: "Home", path: "/home", icon: Home },
     { label: "Book Now", path: "/booking", icon: CalendarCheck },
     { label: "Restaurants", path: "/restaurants", icon: UtensilsCrossed },
     { label: "Special Events", path: "/events", icon: Star }, // Updated icon
