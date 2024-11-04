@@ -11,6 +11,7 @@ import Register from "./Pages/Register";
 import RestaurantsList from "./Pages/Restaurants";
 import RestaurantDetail from "./components/RestaurantDetail";
 import { Hotel } from "lucide-react";
+import AboutUs from "./Pages/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: `/restaurantdetails/:hotelid`,
         element: <RestaurantDetail />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
       },
     ],
   },
