@@ -115,4 +115,14 @@ router.get("/admin-hotels/:userId", async (req, res) => {
   }
 });
 
+// Route to get all hotel details
+router.get("/admin-hotels", async (req, res) => {
+  try {
+    const hotels = await Hotel.find(); // Fetch all hotels
+    res.json(hotels);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

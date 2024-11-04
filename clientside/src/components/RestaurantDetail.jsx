@@ -16,8 +16,8 @@ const RestaurantDetail = () => {
       try {
         // Replace with your actual API endpoints
         const [hotelResponse, foodResponse] = await Promise.all([
-          fetch(`/api/hotels/${hotelId}`),
-          fetch(`/api/hotels/${hotelId}/food-items`),
+          fetch(`${import.meta.env.VITE_API}hotel/${hotelId}`),
+          fetch(`${import.meta.env.VITE_API}/hotels/${hotelId}/food-items`),
         ]);
 
         if (!hotelResponse.ok || !foodResponse.ok) {

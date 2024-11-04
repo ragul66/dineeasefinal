@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { MapPin, Clock, Phone } from "lucide-react";
+import { MapPin, Clock } from "lucide-react";
 
 // Restaurant Card Component
 const RestaurantCard = ({ hotel }) => {
@@ -8,12 +8,12 @@ const RestaurantCard = ({ hotel }) => {
 
   return (
     <div
-      onClick={() => navigate(`/restaurant/${hotel._id}`)}
+      onClick={() => navigate(`/restaurantdetails/${hotel._id}`)}
       className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
     >
       <div className="relative h-48 overflow-hidden">
         <img
-          src={hotel.hotelPhotos[0]}
+          src={`${import.meta.env.VITE_API}${hotel.hotelPhotos[0]}`}
           alt={hotel.hotelName}
           className="w-full h-full object-cover"
         />
@@ -40,18 +40,36 @@ const RestaurantsList = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        // Replace with your actual API endpoint
         const response = await fetch(
-          `${import.meta.env.VITE_API}admin-hotels/${userId}`
+          `${import.meta.env.VITE_API}hotel/admin-hotels`
         );
-        if (!response.ok) throw new Error("Failed to fetch hotels");
-        const data = await response.json();
-        setHotels(data);
+
+        // Log the response for debugging
+        console.log("Response Status:", response.status);
+        console.log(
+          "Response Content-Type:",
+          response.headers.get("content-type")
+        );
+
+        if (!response.ok)
+          throw new Error(`Failed to fetch hotels: ${response.status}`);
+
+        // Check if the response is JSON
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          if (Array.isArray(data)) {
+            setHotels(data);
+          } else {
+            throw new Error("Unexpected data format");
+          }
+        } else {
+          throw new Error("Expected JSON response, received something else");
+        }
       } catch (err) {
         setError(err.message);
       } finally {
