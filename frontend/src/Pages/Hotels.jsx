@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const AddOrDisplayHotel = () => {
   const [hotelData, setHotelData] = useState(null);
   const [hotelName, setHotelName] = useState("");
+  const [hotellocation, sethotellocation] = useState("");
   const [hotelPhotos, setHotelPhotos] = useState([]);
   const [FssaicertificateImage, setFssaicertificateImage] = useState(null);
   const [nocImage, setNocImage] = useState(null);
@@ -110,6 +111,21 @@ const AddOrDisplayHotel = () => {
               required
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Enter hotel name"
+            />
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
+              <span className="text-lg">🏨</span>
+              Hotel Location with Pincode
+            </label>
+            <input
+              type="text"
+              value={hotelName}
+              onChange={(e) => setHotelName(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="Enter hotel Location with Pincode"
             />
           </div>
 

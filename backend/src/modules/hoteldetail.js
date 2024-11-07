@@ -19,7 +19,25 @@ const hoteldetailSchema = new Schema(
     HTLcertificate: {
       type: String,
     },
+    location: {
+      type: String,
+    },
+    opentime: {
+      type: String,
+    },
     //upload a food details too
+    FoodItem: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "fooditems",
+      },
+    ],
+    RatandRev: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "ratandrev",
+      },
+    ],
   },
   {
     timestamps: true,
