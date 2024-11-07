@@ -67,6 +67,8 @@ router.post(
       // Create the hotel entry
       const newHotel = new Hotel({
         hotelName,
+        location,
+        opentime,
         hotelPhotos,
         FssaicertificateImage,
         nocImage,

@@ -4,6 +4,7 @@ const AddOrDisplayHotel = () => {
   const [hotelData, setHotelData] = useState(null);
   const [hotelName, setHotelName] = useState("");
   const [hotellocation, sethotellocation] = useState("");
+  const [opentime, setopentime] = useState("");
   const [hotelPhotos, setHotelPhotos] = useState([]);
   const [FssaicertificateImage, setFssaicertificateImage] = useState(null);
   const [nocImage, setNocImage] = useState(null);
@@ -51,6 +52,8 @@ const AddOrDisplayHotel = () => {
 
     const formData = new FormData();
     formData.append("hotelName", hotelName);
+    formData.append("location", hotellocation);
+    formData.append("opentime", opentime);
     hotelPhotos.forEach((photo) => formData.append("hotelPhotos", photo));
     if (FssaicertificateImage)
       formData.append("FssaicertificateImage", FssaicertificateImage);
@@ -114,6 +117,7 @@ const AddOrDisplayHotel = () => {
             />
           </div>
 
+          {/* get the lcoation from the Admin */}
           <div className="bg-gray-50 p-6 rounded-lg">
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
               <span className="text-lg">🏨</span>
@@ -121,14 +125,31 @@ const AddOrDisplayHotel = () => {
             </label>
             <input
               type="text"
-              value={hotelName}
-              onChange={(e) => setHotelName(e.target.value)}
+              value={hotellocation}
+              onChange={(e) => sethotellocation(e.target.value)}
               required
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Enter hotel Location with Pincode"
             />
           </div>
 
+          {/* get the opentime from the admin */}
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
+              <span className="text-lg">🏨</span>
+              Hotel Open time With (eg. 9AM-10PM)
+            </label>
+            <input
+              type="text"
+              value={opentime}
+              onChange={(e) => setopentime(e.target.value)}
+              required
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="Enter hotel Location with Pincode"
+            />
+          </div>
+
+          {/* get the hotelphotos from the admin */}
           <div className="bg-gray-50 p-6 rounded-lg">
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
               <span className="text-lg">📸</span>
@@ -243,6 +264,20 @@ const AddOrDisplayHotel = () => {
                   <span className="text-xl">🏨</span>
                   <h3 className="text-2xl font-bold text-gray-800">
                     {hotel.hotelName}
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-xl">🏨</span>
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    {hotel.location}
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-xl">🏨</span>
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    {hotel.opentime}
                   </h3>
                 </div>
 
