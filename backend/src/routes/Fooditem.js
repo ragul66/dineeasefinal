@@ -115,6 +115,21 @@ router.get("/fooditems/:userId", async (req, res) => {
   }
 });
 
+// Get full details of food items by hotel ID
+router.get("/hotels/:hotelId/food-items", async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.hotelId).populate("FoodItem"); // Populate FoodItem details
+
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+
+    res.json(hotel.FoodItem); // Return the populated FoodItem array with full details
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // PUT: Update a food item by ID
 router.put(
   "/update-fooditem/:userId/:foodId",

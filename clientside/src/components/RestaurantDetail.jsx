@@ -21,10 +21,11 @@ const RestaurantDetail = () => {
       try {
         const [hotelResponse, foodResponse] = await Promise.all([
           fetch(`${import.meta.env.VITE_API}hotel/${hotelId}`),
-          fetch(
-            `${import.meta.env.VITE_API}hotel/hotels/${hotelId}/food-items`
-          ),
+          fetch(`${import.meta.env.VITE_API}food/hotels/${hotelId}/food-items`),
         ]);
+
+        // console.log(hotelResponse);
+        // console.log(foodResponse);
 
         if (!hotelResponse.ok || !foodResponse.ok) {
           throw new Error("Failed to fetch data");
@@ -82,7 +83,7 @@ const RestaurantDetail = () => {
           </div>
           <div className="flex items-center">
             <Clock className="w-5 h-5 mr-2" />
-            <span>{hotel.AvailabilityTime || "Hours not specified"}</span>
+            <span>{hotel.opentime || "Hours not specified"}</span>
           </div>
           <div className="flex items-center">
             <Phone className="w-5 h-5 mr-2" />
@@ -133,11 +134,11 @@ const RestaurantDetail = () => {
           {foodItems.map((item) => (
             <div
               key={item._id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
+              className="bg-white rounded-lg shadow-md overflow-hidden mb-4"
             >
               <div className="relative h-48">
                 <img
-                  src={item.foodphoto}
+                  src={foodItems.foodphoto}
                   alt={item.foodname}
                   className="w-full h-full object-cover"
                 />
@@ -145,9 +146,29 @@ const RestaurantDetail = () => {
               <div className="p-4">
                 <h3 className="text-xl font-semibold mb-2">{item.foodname}</h3>
                 <p className="text-gray-600 mb-2">{item.description}</p>
+
+                <div className="text-sm text-gray-500 mb-2">
+                  <p>
+                    Category:{" "}
+                    <span className="font-medium">{item.category}</span>
+                  </p>
+                  <p>
+                    Subcategory:{" "}
+                    <span className="font-medium">{item.subcategory}</span>
+                  </p>
+                </div>
+
+                <div className="text-sm text-gray-500 mb-4">
+                  <p>
+                    Timing: <span className="font-medium">{item.timing}</span>
+                  </p>
+                </div>
+
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-bold">₹{item.price}</span>
-                  <span className="text-sm text-gray-500">{item.timing}</span>
+                  {/* <span className="text-sm text-gray-500">
+                    {new Date(item.createdAt).toLocaleDateString()}
+                  </span> */}
                 </div>
               </div>
             </div>

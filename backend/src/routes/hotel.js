@@ -140,14 +140,4 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//Get the fooditems by hotelID
-router.get("/hotels/:hotelId/food-items", async (req, res) => {
-  try {
-    const foodItems = await FoodItem.find({ hotel: req.params.hotelId });
-    res.json(foodItems);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 module.exports = router;
