@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ["Poppins", "serif"],
+        secondary: ["Edu AU VIC WA NT Pre", "cursive"],
       },
     },
   },

@@ -5,39 +5,59 @@ const AboutUs = () => {
     <div className="bg-gray-100 text-gray-800">
       {/* Hero Section */}
       <section className="bg-orange-100 text-black py-20 px-6">
-        <div className="container mx-auto text-center max-w-2xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Welcome to Dineease
-          </h1>
-          <p className="text-lg text-gray-600 md:text-xl">
-            Simplifying your dining experience with easy booking, top-notch
-            services, and delightful cuisine at your favorite restaurants.
-          </p>
+        <div className="container mx-auto flex flex-col lg:flex-row items-center max-w-6xl">
+          <div className="lg:w-1/2 text-center lg:text-left mb-6 lg:mb-0">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-secondary">
+              Welcome to Dineease
+            </h1>
+            <p className="text-lg text-gray-600 md:text-xl">
+              Simplifying your dining experience with easy booking, top-notch
+              services, and delightful cuisine at your favorite restaurants.
+            </p>
+          </div>
+          <div className="lg:w-1/2">
+            <img
+              src="../src/assets/h1.jpg"
+              alt="Dining Experience"
+              className="rounded-lg shadow-lg w-full"
+            />
+          </div>
         </div>
       </section>
 
       {/* Our Mission */}
       <section className="py-16 px-6">
-        <div className="container mx-auto text-center max-w-3xl">
-          <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
-          <p className="text-lg mb-6">
-            At Dineease, we strive to make dining out as enjoyable and seamless
-            as possible. We connect diners with great restaurants, providing a
-            platform to easily book tables, discover new culinary experiences,
-            and access exclusive offers.
-          </p>
-          <p className="text-lg">
-            Whether you're looking for a cozy place for two or a trendy spot for
-            a group celebration, Dineease is here to make your dining plans
-            effortless.
-          </p>
+        <div className="container mx-auto flex flex-col lg:flex-row items-center max-w-6xl">
+          <div className="lg:w-1/2 mb-6 lg:mb-0">
+            <img
+              src="../src/assets/h2.jpg"
+              alt="Our Mission"
+              className="rounded-lg shadow-lg w-full"
+            />
+          </div>
+          <div className="lg:w-1/2 text-center lg:text-left  lg:ml-12">
+            <h2 className="text-3xl font-bold mb-4 font-secondary">
+              Our Mission
+            </h2>
+            <p className="text-lg mb-6">
+              At Dineease, we strive to make dining out as enjoyable and
+              seamless as possible. We connect diners with great restaurants,
+              providing a platform to easily book tables, discover new culinary
+              experiences, and access exclusive offers.
+            </p>
+            <p className="text-lg">
+              Whether you're looking for a cozy place for two or a trendy spot
+              for a group celebration, Dineease is here to make your dining
+              plans effortless.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="bg-white py-16 px-6">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-3xl font-bold mb-10">Features</h2>
+          <h2 className="text-3xl font-bold mb-10 font-secondary">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="p-6 bg-gray-100 rounded-lg shadow-md">
               <h3 className="text-2xl font-semibold mb-2">Easy Reservations</h3>
@@ -92,7 +112,9 @@ const AboutUs = () => {
       {/* Team Section */}
       <section className="py-16 px-6">
         <div className="container mx-auto text-center max-w-3xl">
-          <h2 className="text-3xl font-bold mb-10">Meet Our Team</h2>
+          <h2 className="text-3xl font-bold mb-10 font-secondary">
+            Meet Our Team
+          </h2>
           <p className="text-lg mb-10">
             Dineease is powered by a passionate team of food lovers, developers,
             and designers, all dedicated to enhancing the dining experience.
@@ -125,7 +147,9 @@ const AboutUs = () => {
       {/* Testimonials Section */}
       <section className="bg-white py-16 px-6">
         <div className="container mx-auto text-center max-w-3xl">
-          <h2 className="text-3xl font-bold mb-10">What Our Users Say</h2>
+          <h2 className="text-3xl font-bold mb-10 font-secondary">
+            What Our Users Say
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gray-100 p-6 rounded-lg shadow-md">
               <p className="italic">
@@ -146,15 +170,15 @@ const AboutUs = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-blue-900 text-white py-16 px-6 text-center">
+      <section className="bg-orange-100 text-black py-16 px-6 text-center">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 font-secondary">
             Ready to Discover Your Next Favorite Restaurant?
           </h2>
           <p className="text-lg mb-6">
             Join Dineease today and experience dining out like never before.
           </p>
-          <button className="bg-white text-blue-900 font-semibold py-2 px-6 rounded-full transition-transform hover:scale-105">
+          <button className="bg-white text-blue-900 font-semibold py-2 px-6 rounded-full transition-transform hover:scale-105 hover:bg-orange-400 hover:text-white">
             Download the App
           </button>
         </div>
