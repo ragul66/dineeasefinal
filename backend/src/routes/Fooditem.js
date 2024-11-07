@@ -17,15 +17,53 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // POST: Add a new food item
+// router.post(
+//   "/add-fooditem/:userId",
+//   upload.single("foodphoto"),
+//   async (req, res) => {
+//     try {
+//       const { foodname, description, price, timing, category, subcategory } =
+//         req.body;
+//       const foodphoto = req.file ? req.file.path : null;
+//       const { userId } = req.params;
+
+//       const fooditem = new Food({
+//         foodname,
+//         foodphoto,
+//         description,
+//         price,
+//         timing,
+//         category,
+//         subcategory,
+//       });
+
+//       const savedFood = await fooditem.save();
+
+//       const admin = await Admin.findById(userId);
+//       if (!admin) {
+//         return res.status(404).json({ error: "Admin not found" });
+//       }
+
+//       admin.FoodItem.push(savedFood._id);
+//       await admin.save();
+
+//       res.status(201).json(savedFood);
+//     } catch (error) {
+//       res.status(500).json({ error: "Failed to add food item" });
+//     }
+//   }
+// );
+
+// POST: Add a new food item
 router.post(
-  "/add-fooditem/:userId",
+  "/add-fooditem/:userId/:hotelId",
   upload.single("foodphoto"),
   async (req, res) => {
     try {
       const { foodname, description, price, timing, category, subcategory } =
         req.body;
       const foodphoto = req.file ? req.file.path : null;
-      const { userId } = req.params;
+      const { userId, hotelId } = req.params;
 
       const fooditem = new Food({
         foodname,
@@ -39,13 +77,21 @@ router.post(
 
       const savedFood = await fooditem.save();
 
+      // Add food item to the Admin's FoodItem array
       const admin = await Admin.findById(userId);
       if (!admin) {
         return res.status(404).json({ error: "Admin not found" });
       }
-
       admin.FoodItem.push(savedFood._id);
       await admin.save();
+
+      // Add food item to the Hotel's FoodItem array
+      const hotel = await Hotel.findById(hotelId);
+      if (!hotel) {
+        return res.status(404).json({ error: "Hotel not found" });
+      }
+      hotel.FoodItem.push(savedFood._id);
+      await hotel.save();
 
       res.status(201).json(savedFood);
     } catch (error) {
