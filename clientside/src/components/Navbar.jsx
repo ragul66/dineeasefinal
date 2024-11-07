@@ -21,10 +21,9 @@ const Navbar = () => {
 
   const menuItems = [
     { label: "Home", path: "/home", icon: Home },
-    { label: "Book Now", path: "/booking", icon: CalendarCheck },
     { label: "Restaurants", path: "/restaurants", icon: UtensilsCrossed },
     { label: "Special Events", path: "/events", icon: Star }, // Updated icon
-    { label: "Gallery", path: "/gallery", icon: Image },
+    { label: "Bookings", path: "/booking", icon: CalendarCheck },
     { label: "About Us", path: "/about", icon: Info },
     { label: "Contact", path: "/contact", icon: Phone },
   ];
