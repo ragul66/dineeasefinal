@@ -4,6 +4,7 @@ const path = require("path");
 const multer = require("multer");
 const Hotel = require("../modules/hoteldetail"); // Hotel model
 const Admin = require("../modules/admin"); // Admin model
+const FoodItem = require("../modules/Food");
 
 // Configure Multer to store images in specific folders
 const storage = multer.diskStorage({
@@ -121,6 +122,29 @@ router.get("/admin-hotels", async (req, res) => {
   try {
     const hotels = await Hotel.find(); // Fetch all hotels
     res.json(hotels);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get hotel by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+    res.json(hotel);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//Get the fooditems by hotelID
+router.get("/hotels/:hotelId/food-items", async (req, res) => {
+  try {
+    const foodItems = await FoodItem.find({ hotel: req.params.hotelId });
+    res.json(foodItems);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

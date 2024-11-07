@@ -1,6 +1,11 @@
 // Restaurant Detail Component
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  FiMapPin as MapPin,
+  FiClock as Clock,
+  FiPhone as Phone,
+} from "react-icons/fi";
+
 const RestaurantDetail = () => {
   const [hotel, setHotel] = useState(null);
   const [foodItems, setFoodItems] = useState([]);
@@ -14,10 +19,11 @@ const RestaurantDetail = () => {
   useEffect(() => {
     const fetchHotelDetails = async () => {
       try {
-        // Replace with your actual API endpoints
         const [hotelResponse, foodResponse] = await Promise.all([
           fetch(`${import.meta.env.VITE_API}hotel/${hotelId}`),
-          fetch(`${import.meta.env.VITE_API}/hotels/${hotelId}/food-items`),
+          fetch(
+            `${import.meta.env.VITE_API}hotel/hotels/${hotelId}/food-items`
+          ),
         ]);
 
         if (!hotelResponse.ok || !foodResponse.ok) {
