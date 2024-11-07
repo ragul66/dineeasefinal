@@ -5,6 +5,10 @@ import { IoAddOutline } from "react-icons/io5";
 function Fooditems() {
   const [foodItems, setFoodItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [hotels, sethotels] = useState([]);
+  // {
+  //   console.log(hotels);
+  // }
   const [foodData, setFoodData] = useState({
     foodname: "",
     description: "",
@@ -15,6 +19,7 @@ function Fooditems() {
   });
   const [foodPhoto, setFoodPhoto] = useState(null);
   const userId = localStorage.getItem("userId");
+  const hotelId = localStorage.getItem("hotelId");
   const [selectedImage, setSelectedImage] = useState(null);
   const [availableSubcategories, setAvailableSubcategories] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -56,10 +61,39 @@ function Fooditems() {
     closeEditModal();
   };
 
+  //fetch the hotelId and store it to the localstorage
+  // Fetch hotel details for the ID and save hotelId to localStorage
+  const fetchhotels = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API}hotel/admin-hotels/${userId}`
+      );
+
+      if (!response.ok) throw new Error("Failed to fetch hotels");
+
+      const data = await response.json();
+      // console.log("Fetched hotel data:", data); // Check structure
+
+      if (Array.isArray(data.hotels)) {
+        sethotels(data.hotels); // Set the hotels state with the array from data.hotels
+        localStorage.setItem("hotelId", data.hotels[0]._id); // Save array of IDs
+      } else {
+        console.error("Unexpected data format:", data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch hotels:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchhotels();
+  }, []);
+
   // Fetch categories
   const fetchCategories = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API}category`);
+
       if (!response.ok) throw new Error("Failed to fetch categories");
 
       const data = await response.json();
@@ -145,7 +179,7 @@ function Fooditems() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}food/add-fooditem/${userId}`,
+        `${import.meta.env.VITE_API}food/add-fooditem/${userId}/${hotelId}`,
         {
           method: "POST",
           body: formData,

@@ -45,7 +45,7 @@ const Dashboard = () => {
           `${import.meta.env.VITE_API}hotel/admin-hotels/${userId}`
         );
         const hotel = await response.json();
-        console.log(hotel);
+        // console.log(hotel);
         if (response.ok) {
           setHotelData(hotel);
         } else {

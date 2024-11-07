@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const Food = require("../modules/Food");
 const Admin = require("../modules/admin"); // Admin model
+const Hotel = require("../modules/hoteldetail");
 const router = express.Router(); // Change router to express.Router()
 
 // Configure multer for file uploads
