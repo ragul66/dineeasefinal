@@ -7,28 +7,30 @@ const RestaurantCard = ({ hotel }) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      onClick={() => navigate(`/restaurantdetails/${hotel._id}`)}
-      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
-    >
-      <div className="relative h-48 overflow-hidden">
-        <img
-          src={`${import.meta.env.VITE_API}${hotel.hotelPhotos[0]}`}
-          alt={hotel.hotelName}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">{hotel.hotelName}</h3>
-        <div className="flex items-center text-gray-600 mb-2">
-          <MapPin className="w-4 h-4 mr-2" />
-          <span className="text-sm">
-            {hotel.location || "Location not specified"}
-          </span>
+    <div className="grid gap-4  ">
+      <div
+        onClick={() => navigate(`/restaurantdetails/${hotel._id}`)}
+        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
+      >
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={`${import.meta.env.VITE_API}${hotel.hotelPhotos[0]}`}
+            alt={hotel.hotelName}
+            className="w-full h-full object-cover"
+          />
         </div>
-        <div className="flex items-center text-gray-600">
-          <Clock className="w-4 h-4 mr-2" />
-          <span className="text-sm">{hotel.opentime}</span>
+        <div className="p-4">
+          <h3 className="text-xl font-semibold mb-2">{hotel.hotelName}</h3>
+          <div className="flex items-center text-gray-600 mb-2">
+            <MapPin className="w-4 h-4 mr-2" />
+            <span className="text-sm">
+              {hotel.location || "Location not specified"}
+            </span>
+          </div>
+          <div className="flex items-center text-gray-600">
+            <Clock className="w-4 h-4 mr-2" />
+            <span className="text-sm">{hotel.opentime}</span>
+          </div>
         </div>
       </div>
     </div>

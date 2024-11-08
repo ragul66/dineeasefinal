@@ -1,6 +1,6 @@
 // Restaurant Detail Component
 import React, { useState, useEffect } from "react";
-// import { Star, FIMapPin, Clock, Phone } from "react-icons";
+import { useNavigate } from "react-router-dom";
 import {
   FiStar as Star,
   FiMapPin as MapPin,
@@ -14,6 +14,11 @@ const RestaurantDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("menu");
+  const navigate = useNavigate();
+
+  const handleBooking = () => {
+    navigate(`/restaurantsdetails/bookrestaurant/${hotelId}`); // Navigate to the home page
+  };
 
   // Get hotel ID from URL params
   const hotelId = window.location.pathname.split("/").pop();
@@ -67,7 +72,7 @@ const RestaurantDetail = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 font-primary">
       {/* Hotel Header */}
       <div className="flex flex-col lg:flex-row bg-orange-100 text-white p-6 lg:p-8 rounded-lg lg:space-x-8 space-y-4 lg:space-y-0">
         {/* Left Section: Hotel Image */}
@@ -86,7 +91,7 @@ const RestaurantDetail = () => {
         {/* Right Section: Hotel Info */}
         <div className="w-full lg:w-2/3 space-y-4">
           {/* Hotel Name */}
-          <h1 className="text-2xl lg:text-4xl font-bold text-black">
+          <h1 className="text-2xl lg:text-4xl font-bold text-black ">
             {hotel.hotelName}
           </h1>
 
@@ -131,7 +136,10 @@ const RestaurantDetail = () => {
           </div>
 
           {/* Booking Button */}
-          <button className="w-full lg:w-auto mt-4 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg">
+          <button
+            onClick={handleBooking}
+            className="w-full lg:w-auto mt-4 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg"
+          >
             Book now
           </button>
         </div>

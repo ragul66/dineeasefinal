@@ -10,9 +10,9 @@ import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import RestaurantsList from "./Pages/Restaurants";
 import RestaurantDetail from "./components/RestaurantDetail";
-import { Hotel } from "lucide-react";
 import AboutUs from "./Pages/AboutUs";
 import Bookings from "./Pages/Bookings";
+import BookRestaurant from "./components/BookRestaurant";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/booking",
         element: <Bookings />,
+      },
+      {
+        path: "/restaurantsdetails/bookrestaurant/:hotelId",
+        element: <BookRestaurant />,
       },
     ],
   },

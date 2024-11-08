@@ -7,7 +7,7 @@ const AboutUs = () => {
       <section className="bg-orange-100 text-black py-20 px-6">
         <div className="container mx-auto flex flex-col lg:flex-row items-center max-w-6xl">
           <div className="lg:w-1/2 text-center lg:text-left mb-6 lg:mb-0">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-secondary">
+            <h1 className="text-4xl md:text-4xl font-bold mb-4 font-secondary">
               Welcome to Dineease
             </h1>
             <p className="text-lg text-gray-600 md:text-xl">
