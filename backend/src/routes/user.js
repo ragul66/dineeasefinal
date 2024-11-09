@@ -3,6 +3,26 @@ const bcrypt = require("bcrypt");
 const User = require("../modules/user");
 const router = express.Router();
 
+//
+// Route to get user profile details by userId
+router.get("/profile/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Fetch user details based on userId
+    const user = await User.findById(userId).select("-password"); // Exclude password from response
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 //manual register
 router.post("/register", async (req, res) => {
   try {
