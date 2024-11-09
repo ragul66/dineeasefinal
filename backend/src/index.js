@@ -43,10 +43,10 @@ app.use("/hotel", hoteldetails);
 app.use("/food", Fooddetail);
 app.use("/user", userdetaiils);
 app.use("/category", categoryupload);
-app.use("/booking", booking);
 
 //user side route
 app.use("/user", user);
+app.use("/booking", booking);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Dineease API");

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Plus, Minus } from "lucide-react";
+import { useParams } from "react-router-dom";
 
 // Sample menu data (in real app, this would come from your API/DB)
 const menuItems = [
@@ -24,10 +25,18 @@ const BookRestaurant = () => {
   const [guestCount, setGuestCount] = useState(1);
   const [orderItems, setOrderItems] = useState({});
   const [totalAmount, setTotalAmount] = useState(0);
+  const [restaurantName, setRestaurantName] = useState("");
 
   // Get IDs from localStorage (in real app these would be set during login/navigation)
-  const userId = localStorage.getItem("userId");
-  const hotelId = localStorage.getItem("hotelId");
+  const userId = localStorage.getItem("clientId");
+
+  useEffect(() => {
+    // Get the current URL and extract the restaurant name (in this case, the 3rd part of the path)
+    const path = window.location.pathname.split("/");
+    const name = path[4]; // The restaurant name should be at the second index in the path
+    setRestaurantName(name);
+    console.log(restaurantName);
+  }, []);
 
   useEffect(() => {
     // Calculate total amount whenever order items change
@@ -64,7 +73,7 @@ const BookRestaurant = () => {
   };
 
   const handleConfirmBooking = async () => {
-    if (!selectedSlot || !userId || !hotelId) {
+    if (!selectedSlot || !userId) {
       alert("Please select a slot and ensure you are logged in");
       return;
     }
@@ -80,9 +89,9 @@ const BookRestaurant = () => {
       };
     });
 
-    const bookingData = {
+    const Booking = {
       userId,
-      hotelId,
+      restaurantName,
       bookingDetails: {
         bookingTime: new Date(selectedSlot.time),
         guests: guestCount,
@@ -97,13 +106,16 @@ const BookRestaurant = () => {
     };
 
     try {
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API}booking/restaurantbooking`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(Booking),
+        }
+      );
 
       if (!response.ok) throw new Error("Booking failed");
 
