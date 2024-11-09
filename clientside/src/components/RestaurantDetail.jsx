@@ -17,7 +17,9 @@ const RestaurantDetail = () => {
   const navigate = useNavigate();
 
   const handleBooking = () => {
-    navigate(`/restaurantsdetails/bookrestaurant/${hotelId}`); // Navigate to the home page
+    navigate(
+      `/restaurantsdetails/bookrestaurant/${hotel.hotelName}/${hotelId}`
+    ); // Navigate to the home page
   };
 
   // Get hotel ID from URL params

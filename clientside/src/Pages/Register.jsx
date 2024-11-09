@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   User,
   Mail,
@@ -19,17 +20,51 @@ const Register = () => {
     email: "",
     password: "",
     city: "",
-    phoneNo: "",
+    phoneNumber: "",
   });
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your registration logic here
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API}user/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          password: formData.password,
+          phoneNumber: formData.phoneNumber,
+          emailid: formData.email,
+          address: formData.city,
+        }),
+      });
+
+      if (response.ok) {
+        setSuccessMessage("User registered successfully");
+        navigate("/");
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          city: "",
+          phoneNumber: "",
+        });
+      } else {
+        const data = await response.json();
+        setErrorMessage(data.message || "An error occurred. Please try again.");
+      }
+    } catch (error) {
+      setErrorMessage("Server error. Please try again later.");
+    }
   };
 
   return (
@@ -121,15 +156,22 @@ const Register = () => {
               </div>
               <input
                 type="tel"
-                name="phone"
-                placeholder="Phone Number"
+                name="phoneNumber"
+                placeholder="PhoneNumber"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                value={formData.phone}
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
               />
             </div>
           </div>
+
+          {errorMessage && (
+            <p className="text-red-500 text-sm">{errorMessage}</p>
+          )}
+          {successMessage && (
+            <p className="text-green-500 text-sm">{successMessage}</p>
+          )}
 
           <div>
             <button

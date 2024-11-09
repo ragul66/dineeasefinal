@@ -40,7 +40,7 @@ router.post("/google-signin", async (req, res) => {
   }
 });
 
-//login to the home page
+// Backend route for user login
 router.post("/login", async (req, res) => {
   try {
     const { emailid, password } = req.body;
@@ -59,7 +59,11 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Please use Google Sign-In" });
     }
 
-    res.status(200).json({ message: "User logged in successfully", user });
+    // Return user ID and success message if login is successful
+    res.status(200).json({
+      message: "User logged in successfully",
+      clientId: user._id, // Sending the client ID to be stored in localStorage
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
   }
