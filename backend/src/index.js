@@ -7,6 +7,7 @@ const superadminroutes = require("./routes/superadmin");
 const hoteldetails = require("./routes/hotel");
 const Fooddetail = require("./routes/Fooditem");
 const userdetaiils = require("./routes/user");
+const booking = require("./routes/bookingroute");
 
 const categoryupload = require("./routes/categoryroute");
 const path = require("path");
@@ -41,6 +42,7 @@ app.use("/hotel", hoteldetails);
 app.use("/food", Fooddetail);
 app.use("/user", userdetaiils);
 app.use("/category", categoryupload);
+app.use("/booking", booking);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Dineease API");
