@@ -50,8 +50,10 @@ const BookRestaurant = () => {
                 : "auto",
             }}
           >
-            <div className="text-orange-600 font-bold text-lg">{slot.time}</div>
-            <div className="text-gray-600 text-sm">{slot.type}</div>
+            <div className="text-orange-600 font-bold text-md lg:text-lg">
+              {slot.time}
+            </div>
+            <div className="text-gray-600 text-xs lg:text-sm">{slot.type}</div>
           </div>
         ))}
       </div>

@@ -13,6 +13,7 @@ import RestaurantDetail from "./components/RestaurantDetail";
 import AboutUs from "./Pages/AboutUs";
 import Bookings from "./Pages/Bookings";
 import BookRestaurant from "./components/BookRestaurant";
+import Profile from "./Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/restaurantsdetails/bookrestaurant/:hotelName/:hotelId",
         element: <BookRestaurant />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
