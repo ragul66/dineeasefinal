@@ -61,11 +61,6 @@ const bookingSchema = new Schema(
       ref: "hotels", // Reference to the Hotels collection
       required: true, // Ensure hotel ID is provided
     },
-    adminId: {
-      type: Schema.Types.ObjectId,
-      ref: "admins", // Reference to the Admins collection
-      required: true, // Ensure admin ID is provided
-    },
     bookingDetails: {
       type: bookingDetailsSchema,
       required: true, // Ensure booking details are provided
