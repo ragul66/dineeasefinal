@@ -9,8 +9,8 @@ const Login = () => {
       }}
     >
       <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md ">
-        <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">
-          Welcome to DineNow!!
+        <h2 className="text-2xl font-bold text-center text-black mb-6">
+          Welcome to <span className="text-orange-500">DineNow!!</span>
         </h2>
         <form className="space-y-4">
           <div>

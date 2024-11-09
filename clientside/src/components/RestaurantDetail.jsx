@@ -96,7 +96,7 @@ const RestaurantDetail = () => {
           </h1>
 
           {/* Rating */}
-          <div className="flex items-center text-base lg:text-lg">
+          <div className="flex items-center text-base lg:text-md">
             <Star className="text-red-500 w-5 h-5 lg:w-6 lg:h-6 mr-1" />
             <span className="text-gray-700">
               {hotel.rating} / 10 ({hotel.reviewCount} Reviews)
