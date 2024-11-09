@@ -25,6 +25,9 @@ const hoteldetailSchema = new Schema(
     opentime: {
       type: String,
     },
+    timeslots: {
+      type: [String],
+    },
     //upload a food details too
     FoodItem: [
       {

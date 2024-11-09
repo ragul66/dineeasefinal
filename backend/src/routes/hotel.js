@@ -127,15 +127,27 @@ router.get("/admin-hotels", async (req, res) => {
   }
 });
 
-// Get hotel by ID
-router.get("/:id", async (req, res) => {
+router.get("/:hotelId", async (req, res) => {
   try {
-    const hotel = await Hotel.findById(req.params.id);
+    const { hotelId } = req.params;
+
+    // Check if hotelId is provided
+    if (!hotelId) {
+      return res.status(404).json({ message: "Hotel ID not provided" });
+    }
+
+    // Find the hotel by ID in the database
+    const hotel = await Hotel.findById(hotelId);
+
+    // If hotel not found, send a 404 response
     if (!hotel) {
       return res.status(404).json({ message: "Hotel not found" });
     }
+
+    // Send the full hotel data as a response
     res.json(hotel);
   } catch (error) {
+    // If an error occurs, send a 500 response with the error message
     res.status(500).json({ message: error.message });
   }
 });
