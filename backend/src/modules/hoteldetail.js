@@ -44,6 +44,12 @@ const hoteldetailSchema = new Schema(
         ref: "ratandrev",
       },
     ],
+    booking: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "booking",
+      },
+    ],
   },
   {
     timestamps: true,

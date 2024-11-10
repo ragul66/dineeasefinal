@@ -1,6 +1,6 @@
 const Booking = require("../modules/booking"); // Adjust the path if necessary
 const User = require("../modules/user");
-const hotel = require("../modules/hoteldetail");
+const Hotel = require("../modules/hoteldetail");
 const path = require("path");
 const fs = require("fs");
 
@@ -30,25 +30,50 @@ exports.getBookingById = async (req, res) => {
 
 // POST a new booking
 exports.createBooking = async (req, res) => {
-  const { ...booking } = req.body;
   const { userId, hotelId } = req.params;
+  const booking = req.body; // The booking object sent from the client (React)
 
   try {
-    // Step 1: Create a new booking
+    // Step 1: Create a new booking using the data sent by the client
+    console.log("Creating a new booking object...");
     const newBooking = new Booking(booking);
+
+    console.log("Saving the booking to the database...");
     const savedBooking = await newBooking.save();
+    console.log("Booking saved successfully:", savedBooking);
 
-    // Step 2: Find the user by userID and add the booking ID to their booking array
-    await User.findByIdAndUpdate(userId, {
-      $push: { booking: savedBooking._id },
-    });
+    // Step 2: Update the user's bookings with the new booking ID
+    try {
+      console.log(`Updating user ${userId} with new booking ID...`);
+      await User.findByIdAndUpdate(userId, {
+        $push: { booking: savedBooking._id },
+      });
+      console.log("User updated successfully.");
+    } catch (userError) {
+      console.error("Error updating the user:", userError);
+      return res
+        .status(400)
+        .json({ message: "Failed to update user", error: userError });
+    }
 
-    await User.findByIdAndUpdate(hotelId, {
-      $push: { booking: savedBooking._id },
-    });
+    // Step 3: Optionally, update the hotel (restaurant) to add the booking
+    try {
+      console.log(`Updating hotel ${hotelId} with new booking ID...`);
+      await Hotel.findByIdAndUpdate(hotelId, {
+        $push: { booking: savedBooking._id },
+      });
+      console.log("Hotel updated successfully.");
+    } catch (hotelError) {
+      console.error("Error updating the hotel:", hotelError);
+      return res
+        .status(400)
+        .json({ message: "Failed to update hotel", error: hotelError });
+    }
 
-    await res.status(201).json(savedBooking);
+    // Return the created booking as a response
+    res.status(201).json(savedBooking);
   } catch (error) {
+    console.error("Error creating the booking:", error);
     res.status(400).json({ message: "Failed to create booking", error });
   }
 };

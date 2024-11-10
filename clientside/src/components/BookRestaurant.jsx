@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Plus, Minus } from "lucide-react";
 
 const BookHotel = () => {
@@ -11,6 +12,7 @@ const BookHotel = () => {
   const [orderItems, setOrderItems] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Get userId from localStorage (in real app this would be set during login)
   const userId = localStorage.getItem("clientId");
@@ -102,6 +104,7 @@ const BookHotel = () => {
 
   const handleBooking = (slot) => {
     setSelectedSlot(slot);
+    console.log(selectedSlot);
   };
 
   const handleGuestChange = (increment) => {
@@ -133,61 +136,100 @@ const BookHotel = () => {
   }, [orderItems]);
 
   const handleConfirmBooking = async () => {
-    if (!selectedSlot || !userId || !hotelData) {
-      alert("Please select a slot and ensure you are logged in");
-      return;
-    }
-
-    setLoading(true);
-
-    const foodOrder = Object.entries(orderItems).map(([itemId, quantity]) => {
-      const item = hotelData.FoodItem.find((item) => item._id === itemId);
-      return {
-        itemName: item.foodname,
-        quantity: quantity,
-        price: item.price,
-      };
-    });
-
-    const booking = {
-      userId,
-      hotelName: hotelData.hotelName,
-      bookingDetails: {
-        bookingTime: new Date(selectedSlot.time),
-        guests: guestCount,
-        foodOrder,
-        totalAmount,
-      },
-      status: {
-        confirmed: true,
-        checkedIn: false,
-        checkedOut: false,
-      },
-    };
-
     try {
+      // Pre-submission validation
+      if (!selectedSlot) {
+        throw new Error("Please select a time slot");
+      }
+
+      if (!userId) {
+        throw new Error("Please log in to make a booking");
+      }
+
+      if (!hotelData || !hotelData._id) {
+        throw new Error("Restaurant information is missing");
+      }
+
+      if (guestCount < 1) {
+        throw new Error("Please select at least one guest");
+      }
+
+      // Validate food order
+      const foodOrder = Object.entries(orderItems).map(([itemId, quantity]) => {
+        const item = foodItems.find((item) => item._id === itemId);
+        // {
+        //   console.log(foodOrder);
+        // }
+        if (!item) {
+          console.log(`Food item not found: ${itemId}`);
+          throw new Error(`Invalid food item selected`);
+        }
+        return {
+          itemId: item._id,
+          itemName: item.foodname, // Use the item's foodname property
+          quantity: quantity,
+          price: item.price, // Use the item's price property
+          category: item.category,
+          subcategory: item.subcategory,
+        };
+      });
+
+      if (foodOrder.length === 0) {
+        throw new Error("Please select at least one food item");
+      }
+
+      setLoading(true);
+
+      // Construct booking object according to schema
+      const booking = {
+        userId: userId,
+        hotelId: hotelData._id, // Using hotelId instead of hotelName
+        bookingDetails: {
+          bookingTime: selectedSlot,
+          guests: guestCount,
+          foodOrder: foodOrder,
+          totalAmount: totalAmount,
+        },
+        status: {
+          confirmed: true,
+          checkedIn: false,
+          checkedOut: false,
+        },
+      };
+
+      // Make API call
       const response = await fetch(
-        `${
-          import.meta.env.VITE_API
-        }booking/restaurantbooking/${userId}/${restaurantName}`,
+        `${import.meta.env.VITE_API}booking/restaurantbooking/${userId}/${
+          hotelData._id
+        }`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            // "Authorization": `Bearer ${token}` // Optional: Add token for authorization if needed
           },
           body: JSON.stringify(booking),
         }
       );
 
-      if (!response.ok) throw new Error("Booking failed");
+      const data = await response.json();
 
+      if (!response.ok) {
+        throw new Error(data.message || "Booking failed");
+      }
+
+      // Success handling
       alert("Booking confirmed successfully!");
+
       // Reset form
       setSelectedSlot(null);
       setGuestCount(1);
       setOrderItems({});
+
+      // Optional: Refresh the page or redirect
+      navigate("/booking");
     } catch (error) {
-      alert("Failed to create booking. Please try again.");
+      alert(error.message || "Failed to create booking. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -280,7 +322,7 @@ const BookHotel = () => {
                   <div className="flex-1">
                     <h3 className="font-semibold">{item.foodname}</h3>
                     <p className="text-sm text-gray-600">
-                      ${item.price.toFixed(2)}
+                      ₹{item.price.toFixed(2)}
                     </p>
                     <div className="flex gap-2">
                       <p className="text-xs text-gray-500">{item.category}</p>
@@ -333,7 +375,7 @@ const BookHotel = () => {
                 <div className="flex justify-between">
                   <span>Total Amount:</span>
                   <span className="font-semibold">
-                    ${totalAmount.toFixed(2)}
+                    ₹{totalAmount.toFixed(2)}
                   </span>
                 </div>
               </div>
