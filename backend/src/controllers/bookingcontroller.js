@@ -1,4 +1,6 @@
 const Booking = require("../modules/booking"); // Adjust the path if necessary
+const User = require("../modules/user");
+const hotel = require("../modules/hoteldetail");
 const path = require("path");
 const fs = require("fs");
 
@@ -28,10 +30,24 @@ exports.getBookingById = async (req, res) => {
 
 // POST a new booking
 exports.createBooking = async (req, res) => {
+  const { ...booking } = req.body;
+  const { userId, hotelId } = req.params;
+
   try {
-    const newBooking = new Booking(req.body);
+    // Step 1: Create a new booking
+    const newBooking = new Booking(booking);
     const savedBooking = await newBooking.save();
-    res.status(201).json(savedBooking);
+
+    // Step 2: Find the user by userID and add the booking ID to their booking array
+    await User.findByIdAndUpdate(userId, {
+      $push: { booking: savedBooking._id },
+    });
+
+    await User.findByIdAndUpdate(hotelId, {
+      $push: { booking: savedBooking._id },
+    });
+
+    await res.status(201).json(savedBooking);
   } catch (error) {
     res.status(400).json({ message: "Failed to create booking", error });
   }

@@ -364,6 +364,13 @@ const AddOrDisplayHotel = () => {
                   </h3>
                 </div>
 
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-xl">🏨</span>
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    {hotel.timeslots}
+                  </h3>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {hotel.hotelPhotos.map((photo, index) => (
                     <img

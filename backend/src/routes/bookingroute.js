@@ -15,7 +15,7 @@ router.get("/", getAllBookings);
 router.get("/:id", getBookingById);
 
 // POST a new booking
-router.post("/restaurantbooking", createBooking);
+router.post("/restaurantbooking/:userID", createBooking);
 
 // UPDATE an existing booking
 router.put("/:id", updateBooking);
