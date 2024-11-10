@@ -46,7 +46,7 @@ router.post(
   async (req, res) => {
     try {
       // Extract text data from request body
-      const { hotelName, location, opentime } = req.body;
+      const { hotelName, location, opentime, timeslots } = req.body;
 
       // Extract file paths for the uploaded images
       const hotelPhotos = req.files["hotelPhotos"]
@@ -70,6 +70,7 @@ router.post(
         hotelName,
         location,
         opentime,
+        timeslots,
         hotelPhotos,
         FssaicertificateImage,
         nocImage,

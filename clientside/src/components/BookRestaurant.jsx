@@ -181,32 +181,29 @@ const BookHotel = () => {
       <p className="text-gray-600 mb-4">Open: {hotelData.opentime}</p>
 
       {/* Time Slots */}
+      {/* Time Slots */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Select Time Slot</h2>
         <div className="flex flex-wrap gap-4">
-          {timeSlots.map((slot, index) => (
-            <div
-              key={index}
-              onClick={() => !selectedSlot && handleBooking(slot)}
-              className={`border rounded-lg p-4 lg:w-32 w-24 lg:h-24 text-center cursor-pointer transition duration-200
-                ${
-                  selectedSlot
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:border-orange-500"
-                }
-                ${
-                  selectedSlot === slot ? "border-orange-500 bg-orange-100" : ""
-                }
-              `}
-            >
-              <div className="text-orange-600 font-bold text-md lg:text-lg">
-                {slot.time}
+          {hotelData.timeslots &&
+            hotelData.timeslots.map((slot, index) => (
+              <div
+                key={index}
+                onClick={() => !selectedSlot && handleBooking(slot)}
+                className={`border rounded-lg p-4 lg:w-32 w-24 lg:h-24 text-center cursor-pointer transition duration-200
+          ${
+            selectedSlot
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:border-orange-500"
+          }
+          ${selectedSlot === slot ? "border-orange-500 bg-orange-100" : ""}
+        `}
+              >
+                <div className="text-orange-600 font-bold text-md lg:text-lg">
+                  {slot}
+                </div>
               </div>
-              <div className="text-gray-600 text-xs lg:text-sm">
-                {slot.type}
-              </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 

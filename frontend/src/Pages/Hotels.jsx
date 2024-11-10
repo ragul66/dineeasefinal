@@ -9,10 +9,44 @@ const AddOrDisplayHotel = () => {
   const [FssaicertificateImage, setFssaicertificateImage] = useState(null);
   const [nocImage, setNocImage] = useState(null);
   const [HTLcertificate, setHTLcertificate] = useState(null);
+  const [timeSlots, setTimeSlots] = useState([{ time: "", period: "AM" }]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [hotels, setHotels] = useState([]);
   const userId = localStorage.getItem("userId");
+
+  //Timeslots
+
+  const handleTimeChange = (index, value) => {
+    const updatedSlots = [...timeSlots];
+    updatedSlots[index].time = value;
+    setTimeSlots(updatedSlots);
+  };
+
+  const handlePeriodChange = (index, value) => {
+    const updatedSlots = [...timeSlots];
+    updatedSlots[index].period = value;
+    setTimeSlots(updatedSlots);
+  };
+
+  const addSlot = () => {
+    setTimeSlots([...timeSlots, { time: "", period: "AM" }]);
+  };
+
+  const removeSlot = (index) => {
+    const updatedSlots = timeSlots.filter((_, i) => i !== index);
+    setTimeSlots(updatedSlots);
+  };
+
+  //save the slots
+  const handleSave = () => {
+    // Prepare data for saving in the format type:[String]
+    const formattedSlots = timeSlots.map(
+      (slot) => `${slot.time} ${slot.period}`
+    );
+    console.log("Timeslots to save:", formattedSlots);
+    // Save formattedSlots to the database
+  };
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -59,6 +93,12 @@ const AddOrDisplayHotel = () => {
       formData.append("FssaicertificateImage", FssaicertificateImage);
     if (nocImage) formData.append("nocImage", nocImage);
     if (HTLcertificate) formData.append("HTLcertificate", HTLcertificate);
+
+    // Add time slots
+    const formattedSlots = timeSlots.map(
+      (slot) => `${slot.time} ${slot.period}`
+    );
+    formattedSlots.forEach((slot) => formData.append("timeslots", slot));
 
     try {
       const response = await fetch(
@@ -215,6 +255,49 @@ const AddOrDisplayHotel = () => {
                 <span className="absolute right-3 top-3 text-gray-400">📤</span>
               </div>
             </div>
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">
+              <span className="text-lg">🕒</span>
+              Timeslots
+            </label>
+            {timeSlots.map((slot, index) => (
+              <div key={index} className="flex gap-3 mb-2">
+                <input
+                  type="time"
+                  value={slot.time}
+                  onChange={(e) => handleTimeChange(index, e.target.value)}
+                  className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                />
+                <select
+                  value={slot.period}
+                  onChange={(e) => handlePeriodChange(index, e.target.value)}
+                  className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                >
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+                <button
+                  onClick={() => removeSlot(index)}
+                  className="text-red-500 hover:text-red-700 transition-all"
+                >
+                  ✖
+                </button>
+              </div>
+            ))}
+            <button
+              onClick={addSlot}
+              className="mt-3 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
+            >
+              + Add Slot
+            </button>
+            <button
+              onClick={handleSave}
+              className="mt-3 ml-3 p-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all"
+            >
+              Save Slots
+            </button>
           </div>
 
           <button

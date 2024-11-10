@@ -28,6 +28,9 @@ const hoteldetailSchema = new Schema(
     timeslots: {
       type: [String],
     },
+    Amenties: {
+      type: [String],
+    },
     //upload a food details too
     FoodItem: [
       {
