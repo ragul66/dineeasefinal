@@ -51,6 +51,7 @@ const Navbar = () => {
 
   const handlelogout = () => {
     localStorage.removeItem("userId");
+    localStorage.removeItem("hotelId");
     navigate("/login");
   };
 
