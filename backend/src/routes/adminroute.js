@@ -1,6 +1,9 @@
 const express = require("express");
 const multer = require("multer");
 const Admin = require("../modules/admin");
+const Hotel = require("../modules/hoteldetail");
+const Booking = require("../modules/booking");
+const User = require("../modules/user");
 const router = express.Router();
 
 // Configure multer for file uploads
@@ -104,6 +107,48 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Server error:", error);
     return res.status(500).json({ error: "Server error" });
+  }
+});
+
+//take the booking for the hotels
+// Route to get hotel and booking details by adminId
+router.get("/hotel-bookings/:adminId", async (req, res) => {
+  try {
+    const { adminId } = req.params;
+
+    // Find the admin by ID
+    const admin = await Admin.findById(adminId);
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    // Get the hotel ID from the admin's record
+    const hotelId = admin.hotels[0]; // Adjust the index if there are multiple hotels
+
+    // Find the hotel by ID
+    const hotel = await Hotel.findById(hotelId);
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+
+    // Get the bookings for the hotel
+    const bookings = await Booking.find({ hotelId: hotel._id });
+
+    // Populate user details for each booking
+    const bookingsWithUserDetails = await Promise.all(
+      bookings.map(async (booking) => {
+        const user = await User.findById(booking.userId);
+        return {
+          ...booking.toObject(),
+          userName: user ? user.name : "Unknown",
+        };
+      })
+    );
+
+    // Return hotel and booking details with user names
+    res.json({ hotel, bookings: bookingsWithUserDetails });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
