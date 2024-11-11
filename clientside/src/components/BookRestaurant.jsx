@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Minus } from "lucide-react";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const BookHotel = () => {
   const [hotelData, setHotelData] = useState(null);
@@ -218,18 +219,25 @@ const BookHotel = () => {
         throw new Error(data.message || "Booking failed");
       }
 
-      // Success handling
-      alert("Booking confirmed successfully!");
-
-      // Reset form
-      setSelectedSlot(null);
-      setGuestCount(1);
-      setOrderItems({});
-
-      // Optional: Refresh the page or redirect
-      navigate("/booking");
+      // Display success message with SweetAlert2
+      Swal.fire({
+        icon: "success",
+        title: "Booking Confirmed!",
+        text: "Thank you for Choosing Dineease Have a great day!",
+        confirmButtonText: "Go to Bookings",
+      }).then(() => {
+        // Reset form and navigate
+        setSelectedSlot(null);
+        setGuestCount(1);
+        setOrderItems({});
+        navigate("/booking");
+      });
     } catch (error) {
-      alert(error.message || "Failed to create booking. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Failed to create booking. Please try again.",
+      });
     } finally {
       setLoading(false);
     }

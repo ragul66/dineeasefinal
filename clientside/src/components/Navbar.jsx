@@ -12,6 +12,7 @@ import {
   Info,
   Phone,
   Star,
+  LogOut,
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -19,6 +20,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const handlelogout = () => {
+    localStorage.removeItem("clientId");
+    navigate("/");
+  };
 
   const menuItems = [
     { label: "Home", path: "/home", icon: Home },
@@ -75,11 +81,18 @@ const Navbar = () => {
                 onClick={() => navigate("/profile")}
               />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
+            {/* <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
               <ShoppingBag className="h-5 w-5 text-gray-600" />
               <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
                 0
               </span>
+            </button> */}
+            <button
+              onClick={() => handlelogout()}
+              className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="ml-2">Logout</span>
             </button>
           </div>
 
