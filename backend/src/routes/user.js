@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../modules/user");
+const Booking = require("../modules/booking");
 const router = express.Router();
 
 //
@@ -86,6 +87,67 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error });
+  }
+});
+
+//get the bookings for the user
+// GET /api/bookings/:userId - Get bookings for a user
+// router.get("/bookingdetail/:clientId", async (req, res) => {
+//   const { clientId } = req.params;
+//   try {
+//     // Find the user in userDb and populate the bookings field
+//     const user = await User.findById(clientId).populate("bookings");
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     res.json(user.bookings);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching bookings", error });
+//   }
+// });
+// GET /api/bookings/:clientId - Get bookings for a user
+router.get("/bookingdetail/:clientId", async (req, res) => {
+  const { clientId } = req.params;
+  try {
+    // Directly fetch bookings from the Booking collection using the clientId
+    const bookings = await Booking.find({ userId: clientId });
+
+    if (!bookings || bookings.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No bookings found for this user" });
+    }
+
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching bookings", error });
+  }
+});
+
+// DELETE /api/bookings/:id - Cancel a booking
+router.delete("/bookings/:bookingId", async (req, res) => {
+  const { bookingId } = req.params;
+  try {
+    // Find the booking to get the userId
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    // Remove the booking reference from the user's document
+    await User.updateOne(
+      { _id: booking.userId },
+      { $pull: { bookings: bookingId } }
+    );
+
+    // Delete the booking from the Booking collection
+    await Booking.findByIdAndDelete(bookingId);
+
+    res.json({ message: "Booking canceled successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error canceling booking", error });
   }
 });
 

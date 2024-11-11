@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
-  console.log(reservations);
+  // console.log(reservations);
   const adminId = localStorage.getItem("userId"); // Retrieve adminId from localStorage
 
   useEffect(() => {
