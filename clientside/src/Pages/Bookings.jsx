@@ -23,10 +23,14 @@ const Bookings = () => {
   }, [clientId]);
 
   const handleCancelBooking = async (bookingId) => {
+    console.log(bookingId);
     try {
-      const response = await fetch(`/api/bookings/${bookingId}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API}user/bookings/${bookingId}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to cancel booking");
       }
