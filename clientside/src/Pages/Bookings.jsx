@@ -23,7 +23,7 @@ const Bookings = () => {
   }, [clientId]);
 
   const handleCancelBooking = async (bookingId) => {
-    console.log(bookingId);
+    // console.log(bookingId);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API}user/bookings/${bookingId}`,

@@ -17,11 +17,11 @@ import AdminHotels from "./components/dummy";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/register",
     element: <Register />,
   },
   {
-    path: "/login",
+    path: "/",
     element: <Login />,
   },
   {
