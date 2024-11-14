@@ -10,7 +10,7 @@ const RestaurantCard = ({ hotel }) => {
     <div className="grid gap-4  ">
       <div
         onClick={() => navigate(`/restaurantdetails/${hotel._id}`)}
-        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105"
+        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105 animate-fadeIn"
       >
         <div className="relative h-48 overflow-hidden">
           <img

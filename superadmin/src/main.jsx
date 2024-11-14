@@ -9,6 +9,7 @@ import SuperAdminApproval from "./pages/superadmin";
 import Categoryupload from "./pages/Categoryupload";
 import Layout from "./components/Layout";
 import Register from "./pages/Register";
+import Carouselupload from "./pages/Carouselupload";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/categoryupload",
         element: <Categoryupload />,
+      },
+      {
+        path: "/carouselUpload",
+        element: <Carouselupload />,
       },
     ],
   },

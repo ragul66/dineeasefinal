@@ -9,6 +9,7 @@ const Fooddetail = require("./routes/Fooditem");
 const userdetaiils = require("./routes/user");
 const booking = require("./routes/bookingroute");
 const categoryupload = require("./routes/categoryroute");
+const carouselImagesupload = require("./routes/carouselroute");
 
 const user = require("./routes/user");
 const path = require("path");
@@ -43,6 +44,7 @@ app.use("/hotel", hoteldetails);
 app.use("/food", Fooddetail);
 app.use("/user", userdetaiils);
 app.use("/category", categoryupload);
+app.use("/carousel", carouselImagesupload);
 
 //user side route
 app.use("/user", user);

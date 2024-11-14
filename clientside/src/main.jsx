@@ -14,6 +14,7 @@ import AboutUs from "./Pages/AboutUs";
 import Bookings from "./Pages/Bookings";
 import BookRestaurant from "./components/BookRestaurant";
 import Profile from "./Pages/Profile";
+import SpecialEvents from "./Pages/SpecialEvents";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/spclevents",
+        element: <SpecialEvents />,
       },
     ],
   },

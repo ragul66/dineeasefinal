@@ -29,7 +29,7 @@ const Navbar = () => {
   const menuItems = [
     { label: "Home", path: "/home", icon: Home },
     { label: "Restaurants", path: "/restaurants", icon: UtensilsCrossed },
-    { label: "Special Events", path: "/events", icon: Star },
+    { label: "Special Events", path: "/spclevents", icon: Star },
     { label: "Bookings", path: "/booking", icon: CalendarCheck },
     { label: "About Us", path: "/about", icon: Info },
     { label: "Contact", path: "/contact", icon: Phone },
@@ -44,7 +44,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <span className="text-2xl font-bold text-orange-400">Dineease</span>
+            <span className="text-3xl font-bold font-secondary text-orange-600">
+              Dineease
+            </span>
           </div>
 
           {/* Desktop Menu */}
@@ -59,7 +61,7 @@ const Navbar = () => {
                     `flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 group ${
                       isActive
                         ? "text-blue-600 bg-gray-100"
-                        : "text-gray-600 hover:text-blue-600"
+                        : "text-black hover:text-blue-600"
                     }`
                   }
                 >

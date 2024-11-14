@@ -20,7 +20,7 @@ const Navbar = () => {
     { icon: Home, text: "Dashboard", href: "/dashboard" },
     { icon: Users, text: "Users", href: "#" },
     { icon: Box, text: "categoryupload", href: "/categoryupload" },
-    { icon: BarChart2, text: "Analytics", href: "#" },
+    { icon: BarChart2, text: "CarouselUpload", href: "/carouselupload" },
   ];
 
   // Update active page based on current URL
@@ -52,7 +52,7 @@ const Navbar = () => {
   const isActive = (text) => activePage === text;
 
   return (
-    <nav className="bg-white  text-gray-600 shadow-lg font-primary">
+    <nav className="bg-white  text-black shadow-lg font-primary">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo and brand */}
@@ -125,7 +125,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4">
+          <div className="md:hidden py-4 text-black">
             <div className="flex flex-col space-y-4">
               {/* Mobile Search */}
               <div className="flex items-center bg-white borer-2 border-black rounded-lg px-3 py-2">

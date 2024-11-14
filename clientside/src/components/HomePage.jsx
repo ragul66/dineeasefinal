@@ -173,34 +173,36 @@ const HomePage = () => {
       </section>
 
       {/* Hero Section */}
-      <div className="bg-orange-100 py-12">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            {/* Left Section (Text) */}
-            <div className="text-center md:text-left md:w-1/2">
-              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
-                Delicious Foods Near Your House
-              </h2>
-              <p className="text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8">
-                Choose from thousands of restaurants and book your favorite
-                seats.
-              </p>
-              {/* Call to Action Button */}
-              <button
-                className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition duration-300"
-                onClick={() => navigate("/restaurants")}
-              >
-                Explore Restaurants
-              </button>
-            </div>
+      <div className="p-4 bg-gray-50">
+        <div className="bg-orange-100 py-12 lg:rounded-full p-4">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              {/* Left Section (Text) */}
+              <div className="text-center md:text-left md:w-1/2">
+                <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
+                  Delicious Foods Near Your House
+                </h2>
+                <p className="text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8">
+                  Choose from thousands of restaurants and book your favorite
+                  seats.
+                </p>
+                {/* Call to Action Button */}
+                <button
+                  className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition hover:translate-x-3  duration-300"
+                  onClick={() => navigate("/restaurants")}
+                >
+                  Explore Restaurants
+                </button>
+              </div>
 
-            {/* Right Section (Image) */}
-            <div className="md:w-1/2 lg:w-2/5 flex justify-center md:justify-end">
-              <img
-                src="../public/assets/herosectionimage.jpg" // Add your image path here
-                alt="Delicious Food"
-                className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
-              />
+              {/* Right Section (Image) */}
+              <div className="md:w-1/2 lg:w-2/5 flex justify-center bg-transparent animate-bounceSlow">
+                <img
+                  src="../public/assets/herosectionimage1.jpg" // Add your image path here
+                  alt="Delicious Food"
+                  className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
+                />
+              </div>
             </div>
           </div>
         </div>
