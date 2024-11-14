@@ -1,29 +1,40 @@
 // src/components/Carousel.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const carouselData = [
   {
     id: 1,
     image: "../src/assets/image.png", // Replace with image URL from DB or use a placeholder
-    title: "Title 1",
-    description: "Description 1",
+    // title: "Title 1",
+    // description: "Description 1",
   },
   {
     id: 2,
     image: "../src/assets/image2.AVIF",
-    title: "Title 2",
-    description: "Description 2",
+    // title: "Title 2",
+    // description: "Description 2",
   },
   {
     id: 3,
     image: "../src/assets/image4.AVIF",
-    title: "Title 3",
-    description: "Description 3",
+    // title: "Title 3",
+    // description: "Description 3",
   },
 ];
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Automatic slide functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === carouselData.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []);
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
@@ -42,21 +53,13 @@ const Carousel = () => {
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{
-          transform: `translateX(calc(-${currentIndex * 100}% - ${
-            currentIndex * 20
-          }px))`, // Adjust for gap between items
-          gap: "20px", // Space between slides
+          transform: `translateX(-${currentIndex * 100}%)`, // Adjusted to simplify transition
         }}
       >
         {carouselData.map((item, index) => (
           <div
             key={item.id}
-            className="w-4/5 flex-shrink-0 mx-2" // Adjust width and add margin
-            style={{
-              width: "80%", // Adjust width to make other images partially visible
-              transform: `scale(${currentIndex === index ? 1 : 0.9})`, // Scale down inactive slides
-              transition: "transform 0.5s ease",
-            }}
+            className="w-full flex-shrink-0 px-2" // Use px-2 to reduce extra white space
           >
             <img
               src={item.image}
