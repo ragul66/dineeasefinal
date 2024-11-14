@@ -39,12 +39,12 @@ const Navbar = () => {
   const handleNavLinkClick = () => setIsMenuOpen(false);
 
   return (
-    <nav className="bg-white shadow-md font-primary">
+    <nav className="bg-orange-50 shadow-lg font-primary">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <span className="text-2xl font-bold text-indigo-600">Dineease</span>
+            <span className="text-2xl font-bold text-orange-400">Dineease</span>
           </div>
 
           {/* Desktop Menu */}
@@ -77,7 +77,7 @@ const Navbar = () => {
             </button>
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
               <User
-                className="h-5 w-5 text-gray-600"
+                className="h-5 w-5 text-black"
                 onClick={() => navigate("/profile")}
               />
             </button>

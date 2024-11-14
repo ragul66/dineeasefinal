@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronDown, ChevronLeft, ChevronRight, Search } from "lucide-react";
+import Carousel from "./Carousel";
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);
@@ -64,54 +65,16 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-primary">
-      <div className="flex flex-col items-center justify-center text-center px-6 py-12  rounded-lg shadow-lg">
+    <div className="min-h-screen  font-primary">
+      {/* <div className="flex flex-col items-center justify-center text-center px-6 py-12  rounded-lg shadow-lg">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-black mb-4">
           Welcome to Dineease
         </h2>
         <p className="text-lg md:text-xl font-medium text-orange-400">
           Your Alltime Favorite Bookings!
         </p>
-      </div>
-
-      {/* Hero Section */}
-      <div className="bg-orange-100 py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            {/* Left Section (Text) */}
-            <div className="text-center md:text-left md:w-1/2">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-4">
-                Delicious Foods Near Your House
-              </h2>
-              <p className="text-xl text-gray-600 mb-8">
-                Choose from thousands of restaurants and book your favorite
-                seats
-              </p>
-              {/* Mobile Search */}
-              <div className="relative max-w-2xl mx-auto md:hidden">
-                <input
-                  type="text"
-                  placeholder="Search for restaurants or dishes..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                <Search
-                  className="absolute right-3 top-3.5 text-gray-400"
-                  size={20}
-                />
-              </div>
-            </div>
-
-            {/* Right Section (Image) */}
-            <div className="md:w-96 mt-8 md:mt-0">
-              <img
-                src="../src/assets/h1.jpg" // Add your image path here
-                alt="Delicious Food"
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> */}
+      <Carousel />
 
       {/* Categories Section */}
       <section className="py-12 bg-gray-50">
@@ -208,6 +171,45 @@ const HomePage = () => {
           )}
         </div>
       </section>
+
+      {/* Hero Section */}
+      <div className="bg-orange-100 py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            {/* Left Section (Text) */}
+            <div className="text-center md:text-left md:w-1/2">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-4">
+                Delicious Foods Near Your House
+              </h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Choose from thousands of restaurants and book your favorite
+                seats
+              </p>
+              {/* Mobile Search */}
+              <div className="relative max-w-2xl mx-auto md:hidden">
+                <input
+                  type="text"
+                  placeholder="Search for restaurants or dishes..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+                {/* <Search
+                  className="absolute right-3 top-3.5 text-gray-400"
+                  size={20}
+                /> */}
+              </div>
+            </div>
+
+            {/* Right Section (Image) */}
+            <div className="md:w-96 mt-8 md:mt-0">
+              <img
+                src="../src/assets/h1.jpg" // Add your image path here
+                alt="Delicious Food"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Featured Restaurants Section */}
       <section className="py-12 bg-gray-100">
