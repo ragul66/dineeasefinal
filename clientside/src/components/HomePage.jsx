@@ -174,37 +174,32 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <div className="bg-orange-100 py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Left Section (Text) */}
             <div className="text-center md:text-left md:w-1/2">
-              <h2 className="text-4xl font-bold text-gray-800 mb-4 mt-4">
+              <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-800 mb-4">
                 Delicious Foods Near Your House
               </h2>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-lg lg:text-xl text-gray-600 mb-6 lg:mb-8">
                 Choose from thousands of restaurants and book your favorite
-                seats
+                seats.
               </p>
-              {/* Mobile Search */}
-              <div className="relative max-w-2xl mx-auto md:hidden">
-                <input
-                  type="text"
-                  placeholder="Search for restaurants or dishes..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-                {/* <Search
-                  className="absolute right-3 top-3.5 text-gray-400"
-                  size={20}
-                /> */}
-              </div>
+              {/* Call to Action Button */}
+              <button
+                className="px-6 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 transition duration-300"
+                onClick={() => navigate("/restaurants")}
+              >
+                Explore Restaurants
+              </button>
             </div>
 
             {/* Right Section (Image) */}
-            <div className="md:w-96 mt-8 md:mt-0">
+            <div className="md:w-1/2 lg:w-2/5 flex justify-center md:justify-end">
               <img
-                src="../src/assets/h1.jpg" // Add your image path here
+                src="../public/assets/herosectionimage.jpg" // Add your image path here
                 alt="Delicious Food"
-                className="w-full h-auto rounded-lg shadow-lg"
+                className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
               />
             </div>
           </div>

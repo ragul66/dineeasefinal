@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
           <div>
-            <h2 className="text-2xl font-bold text-indigo-600">Dineease</h2>
+            <h2 className="text-2xl font-bold text-orange-400">Dineease</h2>
             <p className="mt-2 text-black">
               Experience fine dining at the touch of a button. Discover and book
               the best dining spots in your city.

@@ -4,19 +4,19 @@ import React, { useState, useEffect } from "react";
 const carouselData = [
   {
     id: 1,
-    image: "../src/assets/image.png", // Replace with image URL from DB or use a placeholder
+    image: "../public/assets/image6.AVIF", // Replace with image URL from DB or use a placeholder
     // title: "Title 1",
     // description: "Description 1",
   },
   {
     id: 2,
-    image: "../src/assets/image2.AVIF",
+    image: "../public/assets/image2.AVIF",
     // title: "Title 2",
     // description: "Description 2",
   },
   {
     id: 3,
-    image: "../src/assets/image4.AVIF",
+    image: "../public/assets/image4.AVIF",
     // title: "Title 3",
     // description: "Description 3",
   },
@@ -51,7 +51,7 @@ const Carousel = () => {
   return (
     <div className="relative w-full overflow-hidden mt-4">
       <div
-        className="flex transition-transform duration-500 ease-in-out"
+        className="flex scale-110 translate-x-4 transition-transform duration-500 ease-in-out"
         style={{
           transform: `translateX(-${currentIndex * 100}%)`, // Adjusted to simplify transition
         }}
@@ -59,7 +59,7 @@ const Carousel = () => {
         {carouselData.map((item, index) => (
           <div
             key={item.id}
-            className="w-full flex-shrink-0 px-2" // Use px-2 to reduce extra white space
+            className="w-full  flex-shrink-0 px-2" // Use px-2 to reduce extra white space
           >
             <img
               src={item.image}
