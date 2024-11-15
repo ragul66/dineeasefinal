@@ -262,7 +262,7 @@ const BookHotel = () => {
   const timeSlots = generateTimeSlots();
 
   return (
-    <div className="p-4 font-primary max-w-4xl mx-auto">
+    <div className="p-4 font-primary max-w-4xl mx-auto mt-20">
       <h1 className="text-2xl font-bold mb-2 text-gray-800">
         {hotelData.hotelName}
       </h1>

@@ -74,7 +74,7 @@ const RestaurantDetail = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 font-primary">
+    <div className="container mx-auto px-4 py-8 font-primary mt-12">
       {/* Hotel Header */}
       <div className="flex flex-col lg:flex-row bg-orange-100 text-white p-6 lg:p-8 rounded-lg lg:space-x-8 space-y-4 lg:space-y-0">
         {/* Left Section: Hotel Image */}

@@ -43,8 +43,8 @@ const Bookings = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto ">
-      <h1 className="text-3xl font-extrabold text-gray-800 mb-6">
+    <div className="p-6 max-w-4xl mx-auto mt-20">
+      <h1 className="text-xl md:text-3xl font-extrabold text-gray-800 mb-6">
         My Bookings
       </h1>
       {bookings.length > 0 ? (
