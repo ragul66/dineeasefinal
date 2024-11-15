@@ -5,7 +5,6 @@ import {
   X,
   User,
   Search,
-  ShoppingBag,
   Home,
   CalendarCheck,
   UtensilsCrossed,
@@ -21,7 +20,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handlelogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem("clientId");
     navigate("/");
   };
@@ -39,7 +38,7 @@ const Navbar = () => {
   const handleNavLinkClick = () => setIsMenuOpen(false);
 
   return (
-    <nav className="bg-orange-50 shadow-lg font-primary">
+    <nav className="bg-orange-50 shadow-lg font-primary fixed top-0 mb-12 w-full z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -73,24 +72,18 @@ const Navbar = () => {
           </div>
 
           {/* Right side icons */}
-          <div className="flex items-center space-x-4 ">
+          <div className="flex items-center space-x-4">
             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
               <Search className="h-5 w-5 text-gray-600" />
             </button>
-            <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
-              <User
-                className="h-5 w-5 text-black"
-                onClick={() => navigate("/profile")}
-              />
-            </button>
-            {/* <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
-              <ShoppingBag className="h-5 w-5 text-gray-600" />
-              <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                0
-              </span>
-            </button> */}
             <button
-              onClick={() => handlelogout()}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+              onClick={() => navigate("/profile")}
+            >
+              <User className="h-5 w-5 text-black" />
+            </button>
+            <button
+              onClick={handleLogout}
               className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
             >
               <LogOut className="w-5 h-5" />
@@ -158,34 +151,44 @@ export default Navbar;
 //   Home,
 //   CalendarCheck,
 //   UtensilsCrossed,
-//   Image,
 //   Info,
 //   Phone,
 //   Star,
+//   LogOut,
 // } from "lucide-react";
-// import { NavLink, useLocation } from "react-router-dom"; // Import NavLink and useLocation
+// import { NavLink, useLocation } from "react-router-dom";
 
 // const Navbar = () => {
 //   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const location = useLocation(); // Get the current location
+//   const location = useLocation();
 //   const navigate = useNavigate();
+
+//   const handlelogout = () => {
+//     localStorage.removeItem("clientId");
+//     navigate("/");
+//   };
 
 //   const menuItems = [
 //     { label: "Home", path: "/home", icon: Home },
 //     { label: "Restaurants", path: "/restaurants", icon: UtensilsCrossed },
-//     { label: "Special Events", path: "/events", icon: Star }, // Updated icon
+//     { label: "Special Events", path: "/spclevents", icon: Star },
 //     { label: "Bookings", path: "/booking", icon: CalendarCheck },
 //     { label: "About Us", path: "/about", icon: Info },
 //     { label: "Contact", path: "/contact", icon: Phone },
 //   ];
 
+//   // Close menu on navigation
+//   const handleNavLinkClick = () => setIsMenuOpen(false);
+
 //   return (
-//     <nav className="bg-white shadow-md font-primary">
+//     <nav className="bg-orange-50 shadow-lg font-primary">
 //       <div className="max-w-7xl mx-auto px-4">
 //         <div className="flex justify-between items-center h-16">
 //           {/* Logo */}
 //           <div className="flex-shrink-0 flex items-center">
-//             <span className="text-2xl font-bold text-indigo-600">Dineease</span>
+//             <span className="text-2xl md:text-3xl font-bold font-secondary text-orange-600">
+//               Dineease
+//             </span>
 //           </div>
 
 //           {/* Desktop Menu */}
@@ -200,7 +203,7 @@ export default Navbar;
 //                     `flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 group ${
 //                       isActive
 //                         ? "text-blue-600 bg-gray-100"
-//                         : "text-gray-600 hover:text-blue-600"
+//                         : "text-black hover:text-blue-600"
 //                     }`
 //                   }
 //                 >
@@ -212,21 +215,28 @@ export default Navbar;
 //           </div>
 
 //           {/* Right side icons */}
-//           <div className="hidden md:flex items-center space-x-4">
+//           <div className="flex items-center space-x-4 ">
 //             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
 //               <Search className="h-5 w-5 text-gray-600" />
 //             </button>
 //             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200">
 //               <User
-//                 className="h-5 w-5 text-gray-600"
+//                 className="h-5 w-5 text-black"
 //                 onClick={() => navigate("/profile")}
 //               />
 //             </button>
-//             <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
+//             {/* <button className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 relative">
 //               <ShoppingBag className="h-5 w-5 text-gray-600" />
 //               <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
 //                 0
 //               </span>
+//             </button> */}
+//             <button
+//               onClick={() => handlelogout()}
+//               className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+//             >
+//               <LogOut className="w-5 h-5" />
+//               <span className="ml-2">Logout</span>
 //             </button>
 //           </div>
 
@@ -256,6 +266,7 @@ export default Navbar;
 //                 <NavLink
 //                   key={item.label}
 //                   to={item.path}
+//                   onClick={handleNavLinkClick} // Close menu on navigation
 //                   className={({ isActive }) =>
 //                     `flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
 //                       isActive
@@ -269,26 +280,6 @@ export default Navbar;
 //                 </NavLink>
 //               );
 //             })}
-//           </div>
-//           {/* Mobile icons */}
-//           <div className="px-4 py-3 border-t border-gray-200">
-//             <div className="flex items-center justify-around">
-//               <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200">
-//                 <Search className="h-5 w-5 text-gray-600" />
-//                 <span className="text-xs text-gray-600">Search</span>
-//               </button>
-//               <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200">
-//                 <User className="h-5 w-5 text-gray-600" />
-//                 <span className="text-xs text-gray-600">Profile</span>
-//               </button>
-//               <button className="flex flex-col items-center space-y-1 p-2 hover:bg-gray-100 rounded-md transition-colors duration-200 relative">
-//                 <ShoppingBag className="h-5 w-5 text-gray-600" />
-//                 <span className="text-xs text-gray-600">Bookings</span>
-//                 <span className="absolute -top-1 right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-//                   0
-//                 </span>
-//               </button>
-//             </div>
 //           </div>
 //         </div>
 //       )}
