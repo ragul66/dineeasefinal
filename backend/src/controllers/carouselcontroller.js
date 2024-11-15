@@ -7,11 +7,11 @@ const CarouselImage = require("../modules/carousel");
 // Configure Multer storage for desktop and mobile images
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    if (file.fieldname === "desktopImages") {
-      cb(null, "uploads/Carousels/desktop");
-    } else if (file.fieldname === "mobileImages") {
-      cb(null, "uploads/Carousels/mobile");
-    }
+    const dir =
+      file.fieldname === "desktopImages"
+        ? "uploads/Carousels/desktop"
+        : "uploads/Carousels/mobile";
+    cb(null, dir);
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname));
@@ -50,8 +50,8 @@ const createCarousel = async (req, res) => {
 
     // Create and save the new carousel document
     const carousel = new CarouselImage({
-      carouselImages: desktopImages,
-      carouselImagesMobile: mobileImages,
+      desktopImages: desktopImages,
+      mobileImages: mobileImages,
     });
 
     await carousel.save();
