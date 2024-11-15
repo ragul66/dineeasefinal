@@ -10,7 +10,7 @@ const SuperAdminApproval = () => {
     const fetchPendingAdmins = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}/superadmin/sadmin/pending`
+          `${import.meta.env.VITE_API}superadmin/sadmin/pending`
         );
         const data = await response.json();
         setPendingAdmins(data);

@@ -49,7 +49,7 @@ const CategoryUpload = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/category/categoryupload`,
+        `${import.meta.env.VITE_API}category/categoryupload`,
         {
           method: "POST",
           body: formData,

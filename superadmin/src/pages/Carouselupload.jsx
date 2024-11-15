@@ -5,21 +5,17 @@ const CarouselUpload = () => {
   const [mobileImages, setMobileImages] = useState([]);
   const [message, setMessage] = useState("");
 
-  // Handle file selection for desktop images
   const handleDesktopImagesChange = (e) => {
     setDesktopImages(Array.from(e.target.files));
   };
 
-  // Handle file selection for mobile images
   const handleMobileImagesChange = (e) => {
     setMobileImages(Array.from(e.target.files));
   };
 
-  // Submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a FormData object to send files
     const formData = new FormData();
     desktopImages.forEach((image) => formData.append("desktopImages", image));
     mobileImages.forEach((image) => formData.append("mobileImages", image));
@@ -34,11 +30,17 @@ const CarouselUpload = () => {
       );
 
       if (response.ok) {
-        setMessage("Images uploaded successfully!");
+        const data = await response.json();
+        setMessage(data.message || "Images uploaded successfully!");
+        setDesktopImages([]);
+        setMobileImages([]);
       } else {
+        const errorText = await response.text();
+        console.error("Error response text:", errorText);
         setMessage("Failed to upload images. Please try again.");
       }
     } catch (error) {
+      console.error("Error while uploading images:", error);
       setMessage("An error occurred while uploading images.");
     }
   };
@@ -47,8 +49,11 @@ const CarouselUpload = () => {
     <div className="container mx-auto py-8 px-4">
       <h2 className="text-2xl font-bold mb-4">Upload Carousel Images</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Desktop Images Upload */}
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6"
+        encType="multipart/form-data"
+      >
         <div>
           <label
             className="block text-lg font-medium mb-2"
@@ -66,7 +71,6 @@ const CarouselUpload = () => {
           />
         </div>
 
-        {/* Mobile Images Upload */}
         <div>
           <label
             className="block text-lg font-medium mb-2"
@@ -84,7 +88,6 @@ const CarouselUpload = () => {
           />
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
@@ -93,7 +96,6 @@ const CarouselUpload = () => {
         </button>
       </form>
 
-      {/* Message Display */}
       {message && <p className="mt-4 text-lg font-medium">{message}</p>}
     </div>
   );
