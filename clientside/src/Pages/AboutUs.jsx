@@ -2,15 +2,15 @@ import React from "react";
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-100 text-gray-800">
+    <div className="bg-gray-100 text-gray-800 mt-20">
       {/* Hero Section */}
       <section className="bg-orange-100 text-black py-20 px-6">
         <div className="container mx-auto flex flex-col lg:flex-row items-center max-w-6xl">
           <div className="lg:w-1/2 text-center lg:text-left mb-6 lg:mb-0">
-            <h1 className="text-4xl md:text-4xl font-bold mb-4 font-secondary">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 font-secondary">
               Welcome to Dineease
             </h1>
-            <p className="text-lg text-gray-600 md:text-xl">
+            <p className="text-md text-gray-600 md:text-xl">
               Simplifying your dining experience with easy booking, top-notch
               services, and delightful cuisine at your favorite restaurants.
             </p>
@@ -36,16 +36,16 @@ const AboutUs = () => {
             />
           </div>
           <div className="lg:w-1/2 text-center lg:text-left  lg:ml-12">
-            <h2 className="text-3xl font-bold mb-4 font-secondary">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4 font-secondary">
               Our Mission
             </h2>
-            <p className="text-lg mb-6">
+            <p className="text-md md:text-lg mb-6">
               At Dineease, we strive to make dining out as enjoyable and
               seamless as possible. We connect diners with great restaurants,
               providing a platform to easily book tables, discover new culinary
               experiences, and access exclusive offers.
             </p>
-            <p className="text-lg">
+            <p className="text-md md:text-lg">
               Whether you're looking for a cozy place for two or a trendy spot
               for a group celebration, Dineease is here to make your dining
               plans effortless.

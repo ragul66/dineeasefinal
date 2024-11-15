@@ -38,7 +38,7 @@ const Navbar = () => {
   const handleNavLinkClick = () => setIsMenuOpen(false);
 
   return (
-    <nav className="bg-orange-50 shadow-lg font-primary fixed top-0 mb-12 w-full z-50">
+    <nav className="bg-orange-50 shadow-lg font-primary fixed top-0  w-full z-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

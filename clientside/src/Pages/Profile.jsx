@@ -67,7 +67,7 @@ const Profile = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
+    <div className="max-w-6xl mx-auto p-6 space-y-6 mt-20">
       {/* Header Section */}
       <div className="text-center mb-8">
         <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
