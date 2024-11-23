@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { IoAddOutline } from "react-icons/io5";
+import Loader from "../components/LOader";
 
 function Fooditems() {
   const [foodItems, setFoodItems] = useState([]);
   const [categories, setCategories] = useState([]);
   const [hotels, sethotels] = useState([]);
-  // {
-  //   console.log(hotels);
-  // }
+
   const [foodData, setFoodData] = useState({
     foodname: "",
     description: "",
@@ -24,6 +23,21 @@ function Fooditems() {
   const [availableSubcategories, setAvailableSubcategories] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state
+
+  const fetchAllData = async () => {
+    try {
+      await fetchhotels();
+      await fetchCategories();
+      await fetchFoodItems();
+    } finally {
+      setLoading(false); // Stop loading after data is fetched
+    }
+  };
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
   // Function to open the image modal
   const openImageModal = (imageUrl) => {
@@ -207,186 +221,196 @@ function Fooditems() {
 
   return (
     <div className="container mx-auto p-4 font-primary">
-      <h1 className="text-2xl font-bold mb-4">Create Food Items</h1>
-
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-200 p-6 rounded-lg shadow-md mb-6"
-        encType="multipart/form-data"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="foodname"
-            placeholder="Food Name"
-            value={foodData.foodname}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-          />
-          <input
-            type="number"
-            name="price"
-            placeholder="Price"
-            value={foodData.price}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-          />
-          <input
-            type="text"
-            name="timing"
-            placeholder="Timing"
-            value={foodData.timing}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-          />
-          <textarea
-            name="description"
-            placeholder="Description"
-            value={foodData.description}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-          ></textarea>
-
-          {/* Category Select */}
-          <select
-            name="category"
-            value={foodData.category}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-          >
-            <option value="">Select Category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category.category}>
-                {category.category}
-              </option>
-            ))}
-          </select>
-
-          {/* Subcategory Select */}
-          <select
-            name="subcategory"
-            value={foodData.subcategory}
-            onChange={handleChange}
-            className="border p-2 rounded-md w-full"
-            required
-            disabled={!availableSubcategories.length}
-          >
-            <option value="">Select Subcategory</option>
-            {availableSubcategories.length > 0 ? (
-              availableSubcategories.map((subcat) => (
-                <option key={subcat._id} value={subcat.name}>
-                  {subcat.name}
-                </option>
-              ))
-            ) : (
-              <option value="" disabled>
-                No subcategories available
-              </option>
-            )}
-          </select>
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="border p-2 rounded-md w-full"
-          />
+      {loading ? ( // Show loader while loading
+        <div>
+          <Loader /> {/* Replace with your spinner or loader component */}
         </div>
-        <button
-          type="submit"
-          className="mt-4 bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-blue-600 flex items-center justify-center"
-        >
-          <IoAddOutline className="mr-1" />
-          Add Food Item
-        </button>
-      </form>
+      ) : (
+        <>
+          <div className="container mx-auto p-4 font-primary">
+            <h1 className="text-2xl font-bold mb-4">Create Food Items</h1>
 
-      {/* Food Items List */}
-      <h2 className="text-xl font-semibold mb-4">Food Items List</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="px-4 py-2 text-left">Food Name</th>
-              <th className="px-4 py-2 text-left">Description</th>
-              <th className="px-4 py-2 text-left">Price</th>
-              <th className="px-4 py-2 text-left">Timing</th>
-              <th className="px-4 py-2 text-left">Category</th>
-              <th className="px-4 py-2 text-left">Subcategory</th>
-              <th className="px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {foodItems.map((item) => (
-              <tr key={item._id}>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.foodname}
-                </td>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.description}
-                </td>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.price}
-                </td>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.timing}
-                </td>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.category}
-                </td>
-                <td className="px-4 py-2 border-t-2 border-r-2">
-                  {item.subcategory}
-                </td>
-                <td className="px-4 py-2 flex items-center space-x-2 border-r-2 border-t-2">
-                  <button
-                    onClick={() =>
-                      openImageModal(
-                        `${import.meta.env.VITE_API}${item.foodphoto}`
-                      )
-                    }
-                  >
-                    <FaEye className="text-orange-400" />
-                  </button>
-                  {selectedImage && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                      <div className="bg-white p-4 rounded-lg shadow-lg">
-                        <img
-                          src={selectedImage}
-                          alt="Food Item"
-                          className="w-full h-64 object-cover rounded-md"
-                        />
-                        <button
-                          onClick={closeImageModal}
-                          className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-gray-200 p-6 rounded-lg shadow-md mb-6"
+              encType="multipart/form-data"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  name="foodname"
+                  placeholder="Food Name"
+                  value={foodData.foodname}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                />
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="Price"
+                  value={foodData.price}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                />
+                <input
+                  type="text"
+                  name="timing"
+                  placeholder="Timing"
+                  value={foodData.timing}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                />
+                <textarea
+                  name="description"
+                  placeholder="Description"
+                  value={foodData.description}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                ></textarea>
+
+                {/* Category Select */}
+                <select
+                  name="category"
+                  value={foodData.category}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((category) => (
+                    <option key={category._id} value={category.category}>
+                      {category.category}
+                    </option>
+                  ))}
+                </select>
+
+                {/* Subcategory Select */}
+                <select
+                  name="subcategory"
+                  value={foodData.subcategory}
+                  onChange={handleChange}
+                  className="border p-2 rounded-md w-full"
+                  required
+                  disabled={!availableSubcategories.length}
+                >
+                  <option value="">Select Subcategory</option>
+                  {availableSubcategories.length > 0 ? (
+                    availableSubcategories.map((subcat) => (
+                      <option key={subcat._id} value={subcat.name}>
+                        {subcat.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="" disabled>
+                      No subcategories available
+                    </option>
                   )}
-                  <button
-                    className="text-green-500 hover:text-green-700"
-                    onClick={() => openEditModal(item)}
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    className="text-red-500 hover:text-red-700"
-                    onClick={() => handleDelete(item._id)}
-                  >
-                    <FaTrash />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </select>
+
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="border p-2 rounded-md w-full"
+                />
+              </div>
+              <button
+                type="submit"
+                className="mt-4 bg-orange-400 text-white py-2 px-4 rounded-md hover:bg-blue-600 flex items-center justify-center"
+              >
+                <IoAddOutline className="mr-1" />
+                Add Food Item
+              </button>
+            </form>
+
+            {/* Food Items List */}
+            <h2 className="text-xl font-semibold mb-4">Food Items List</h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-4 py-2 text-left">Food Name</th>
+                    <th className="px-4 py-2 text-left">Description</th>
+                    <th className="px-4 py-2 text-left">Price</th>
+                    <th className="px-4 py-2 text-left">Timing</th>
+                    <th className="px-4 py-2 text-left">Category</th>
+                    <th className="px-4 py-2 text-left">Subcategory</th>
+                    <th className="px-4 py-2 text-left">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {foodItems.map((item) => (
+                    <tr key={item._id}>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.foodname}
+                      </td>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.description}
+                      </td>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.price}
+                      </td>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.timing}
+                      </td>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.category}
+                      </td>
+                      <td className="px-4 py-2 border-t-2 border-r-2">
+                        {item.subcategory}
+                      </td>
+                      <td className="px-4 py-2 flex items-center space-x-2 border-r-2 border-t-2">
+                        <button
+                          onClick={() =>
+                            openImageModal(
+                              `${import.meta.env.VITE_API}${item.foodphoto}`
+                            )
+                          }
+                        >
+                          <FaEye className="text-orange-400" />
+                        </button>
+                        {selectedImage && (
+                          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                            <div className="bg-white p-4 rounded-lg shadow-lg">
+                              <img
+                                src={selectedImage}
+                                alt="Food Item"
+                                className="w-full h-64 object-cover rounded-md"
+                              />
+                              <button
+                                onClick={closeImageModal}
+                                className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                              >
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                        <button
+                          className="text-green-500 hover:text-green-700"
+                          onClick={() => openEditModal(item)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="text-red-500 hover:text-red-700"
+                          onClick={() => handleDelete(item._id)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

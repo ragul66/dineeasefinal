@@ -10,7 +10,7 @@ const AdminHotels = () => {
     const fetchHotels = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}/hotel/admin-hotels/${userId}`
+          `${import.meta.env.VITE_API}hotel/admin-hotels/${userId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch hotels");

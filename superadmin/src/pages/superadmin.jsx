@@ -26,7 +26,7 @@ const SuperAdminApproval = () => {
   const handleStatusUpdate = async (id, status) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API}/superadmin/admin/update-status/${id}`,
+        `${import.meta.env.VITE_API}superadmin/admin/update-status/${id}`,
         {
           method: "PUT",
           headers: {

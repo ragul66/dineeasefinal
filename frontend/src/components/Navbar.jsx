@@ -43,6 +43,11 @@ const Navbar = () => {
       path: "/fooditems",
     },
     {
+      icon: <Coffee className="w-5 h-4" />,
+      label: "Reviews",
+      path: "/review",
+    },
+    {
       icon: <Settings className="w-5 h-5" />,
       label: "Profile",
       path: "/profile",

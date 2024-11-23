@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const navItems = [
     { icon: Home, text: "Dashboard", href: "/dashboard" },
-    { icon: Users, text: "Users", href: "#" },
+    { icon: Users, text: "Users", href: "/users" },
     { icon: Box, text: "categoryupload", href: "/categoryupload" },
     { icon: BarChart2, text: "CarouselUpload", href: "/carouselupload" },
   ];
@@ -86,14 +86,14 @@ const Navbar = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center bg-white border-2 border-black rounded-lg px-3 py-1">
+          {/* <div className="hidden md:flex items-center bg-white border-2 border-black rounded-lg px-3 py-1">
             <Search size={18} className="text-black" />
             <input
               type="text"
               placeholder="Search..."
               className="bg-transparent border-none focus:outline-none text-black placeholder-black ml-2"
             />
-          </div>
+          </div> */}
 
           {/* Right side icons */}
           <div className="hidden md:flex items-center space-x-6">

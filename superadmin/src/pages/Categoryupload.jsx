@@ -75,7 +75,7 @@ const CategoryUpload = () => {
 
   return (
     <div>
-      <div className="flex justify-end mb-4 mr-12">
+      <div className="flex justify-end mb-4 mr-12 font-primary">
         <button
           onClick={toggleModal}
           className="px-4 py-2 bg-orange-400 text-white rounded mt-12 "

@@ -14,6 +14,7 @@ import AddOrDisplayHotel from "./Pages/Hotels";
 import Fooditems from "./Pages/Fooditems";
 
 import AdminHotels from "./components/dummy";
+import Review from "./Pages/Review";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/fooditems",
         element: <Fooditems />,
+      },
+      {
+        path: "/review",
+        element: <Review />,
       },
       {
         path: "/dummy",

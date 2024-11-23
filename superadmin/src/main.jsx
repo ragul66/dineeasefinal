@@ -10,6 +10,7 @@ import Categoryupload from "./pages/Categoryupload";
 import Layout from "./components/Layout";
 import Register from "./pages/Register";
 import Carouselupload from "./pages/Carouselupload";
+import Users from "./pages/Users";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/carouselUpload",
         element: <Carouselupload />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
       },
     ],
   },
