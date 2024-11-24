@@ -169,7 +169,7 @@ const RestaurantDetail = () => {
 
           {/* Rating Form */}
           {isRatingOpen && (
-            <div className="mt-4 bg-white p-4 rounded-lg shadow-lg">
+            <div className="mt-4 bg-white p-2 rounded-lg shadow-lg w-full">
               <h2 className="text-xl font-bold text-black">Rate this Hotel</h2>
               <div className="flex items-center mt-2">
                 <label className="mr-4">Your Rating:</label>
