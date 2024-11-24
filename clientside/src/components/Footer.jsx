@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-300 text-gray-600 py-10 ">
+    <footer className="bg-gray-300 text-gray-600 py-10 font-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
@@ -18,30 +18,35 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-orange-400">
+              Quick Links
+            </h3>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link to="/" className="hover:text-blue-500">
+                <Link to="/" className="hover:text-blue-500 text-black">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-blue-500">
+                <Link to="/about" className="hover:text-blue-500 text-black">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/restaurants" className="hover:text-blue-500">
+                <Link
+                  to="/restaurants"
+                  className="hover:text-blue-500 text-black"
+                >
                   Restaurants
                 </Link>
               </li>
               <li>
-                <Link to="/booking" className="hover:text-blue-500">
+                <Link to="/booking" className="hover:text-blue-500 text-black">
                   Book Now
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-blue-500">
+                <Link to="/contact" className="hover:text-blue-500 text-black">
                   Contact
                 </Link>
               </li>
@@ -50,28 +55,30 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold text-white">Contact Us</h3>
+            <h3 className="text-lg font-semibold text-orange-400">
+              Contact Us
+            </h3>
             <ul className="mt-4 space-y-2">
               <li className="flex items-center space-x-2">
                 <Phone className="w-5 h-5 text-blue-500" />
-                <span>+1 (555) 123-4567</span>
+                <span className="text-black">+1 (555) 123-4567</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-5 h-5 text-blue-500" />
-                <span>support@dineease.com</span>
+                <span className="text-black">support@dineease.com</span>
               </li>
             </ul>
           </div>
 
           {/* Social Media Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white">Follow Us</h3>
+            <h3 className="text-lg font-semibold text-orange-400">Follow Us</h3>
             <div className="flex mt-4 space-x-4">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500"
+                className="text-blue-500 hover:text-blue-500"
               >
                 <Facebook className="w-6 h-6" />
               </a>
@@ -79,7 +86,7 @@ const Footer = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500"
+                className="text-blue-500 hover:text-blue-500"
               >
                 <Twitter className="w-6 h-6" />
               </a>
@@ -87,7 +94,7 @@ const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-500"
+                className="text-blue-500 hover:text-blue-500"
               >
                 <Instagram className="w-6 h-6" />
               </a>
@@ -100,14 +107,14 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center mt-6">
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-black">
             © {new Date().getFullYear()} Dineease. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-4">
-            <Link to="/terms" className="text-gray-400 hover:text-blue-500">
+            <Link to="/terms" className="text-black hover:text-blue-500">
               Terms of Service
             </Link>
-            <Link to="/privacy" className="text-gray-400 hover:text-blue-500">
+            <Link to="/privacy" className="text-black hover:text-blue-500">
               Privacy Policy
             </Link>
           </div>

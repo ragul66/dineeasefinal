@@ -14,6 +14,27 @@ const RestaurantDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("menu");
+  const [isRatingOpen, setIsRatingOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const handleRateNowClick = () => {
+    setIsRatingOpen(!isRatingOpen); // Toggle the visibility of the form
+  };
+
+  const handleRatingSubmit = () => {
+    if (rating > 0 && comment) {
+      console.log("Rating Submitted:", { rating, comment });
+      // Submit rating and comment to the server here
+      alert("Thank you for your feedback!");
+      setIsRatingOpen(false); // Close the form after submission
+      setRating(0);
+      setComment("");
+    } else {
+      alert("Please provide a rating and comment.");
+    }
+  };
+
   const navigate = useNavigate();
 
   const handleBooking = () => {
@@ -84,7 +105,6 @@ const RestaurantDetail = () => {
             alt={hotel.hotelName}
             className="w-full h-full object-cover rounded-lg"
           />
-          {/* "In hotel" Label */}
           <span className="absolute bottom-0 left-0 w-full text-center bg-black bg-opacity-80 py-2 text-sm lg:text-base">
             In hotel
           </span>
@@ -92,12 +112,10 @@ const RestaurantDetail = () => {
 
         {/* Right Section: Hotel Info */}
         <div className="w-full lg:w-2/3 space-y-4">
-          {/* Hotel Name */}
-          <h1 className="text-2xl lg:text-4xl font-bold text-black ">
+          <h1 className="text-2xl lg:text-4xl font-bold text-black">
             {hotel.hotelName}
           </h1>
 
-          {/* Rating */}
           <div className="flex items-center text-base lg:text-md">
             <Star className="text-red-500 w-5 h-5 lg:w-6 lg:h-6 mr-1" />
             <span className="text-gray-700">
@@ -105,7 +123,6 @@ const RestaurantDetail = () => {
             </span>
           </div>
 
-          {/* Available amenities and languages */}
           <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1 bg-gray-700 rounded-lg text-sm lg:text-base">
               WiFi
@@ -121,7 +138,6 @@ const RestaurantDetail = () => {
             </span>
           </div>
 
-          {/* Location, Hours, Phone */}
           <div className="flex flex-wrap gap-4 text-gray-700 text-sm lg:text-base">
             <div className="flex items-center">
               <MapPin className="w-4 h-4 lg:w-5 lg:h-5 mr-2" />
@@ -137,13 +153,50 @@ const RestaurantDetail = () => {
             </div>
           </div>
 
-          {/* Booking Button */}
           <button
             onClick={handleBooking}
             className="w-full lg:w-auto mt-4 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg"
           >
             Book now
           </button>
+
+          <button
+            onClick={handleRateNowClick}
+            className="lg:ml-4 w-fit lg:w-auto mt-4 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-lg"
+          >
+            Rate Now
+          </button>
+
+          {/* Rating Form */}
+          {isRatingOpen && (
+            <div className="mt-4 bg-white p-4 rounded-lg shadow-lg">
+              <h2 className="text-xl font-bold text-black">Rate this Hotel</h2>
+              <div className="flex items-center mt-2">
+                <label className="mr-4">Your Rating:</label>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className={`w-6 h-6 cursor-pointer ${
+                      star <= rating ? "text-yellow-500" : "text-gray-300"
+                    }`}
+                    onClick={() => setRating(star)}
+                  />
+                ))}
+              </div>
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Leave your comment here..."
+                className="w-full mt-4 p-2 border rounded-lg text-black"
+              ></textarea>
+              <button
+                onClick={handleRatingSubmit}
+                className="mt-4 px-6 py-3 bg-green-500 hover:bg-green-600 text-black font-bold rounded-lg"
+              >
+                Submit
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
