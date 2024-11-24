@@ -17,19 +17,46 @@ const RestaurantDetail = () => {
   const [isRatingOpen, setIsRatingOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const hotelIds = localStorage.getItem("hotelId");
 
   const handleRateNowClick = () => {
     setIsRatingOpen(!isRatingOpen); // Toggle the visibility of the form
   };
 
-  const handleRatingSubmit = () => {
+  const handleRatingSubmit = async () => {
     if (rating > 0 && comment) {
-      console.log("Rating Submitted:", { rating, comment });
-      // Submit rating and comment to the server here
-      alert("Thank you for your feedback!");
-      setIsRatingOpen(false); // Close the form after submission
-      setRating(0);
-      setComment("");
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API}rat/hotels/${hotelIds}/ratingreview`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              rating: rating,
+              comments: comment, // Ensure the key matches your backend schema
+            }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Rating Submitted:", data);
+          alert("Thank you for your feedback!");
+
+          // Optionally, update the UI with the new review
+          setIsRatingOpen(false);
+          setRating(0);
+          setComment("");
+        } else {
+          const error = await response.json();
+          alert(`Error: ${error.message}`);
+        }
+      } catch (error) {
+        console.error("Error submitting rating:", error);
+        alert("Failed to submit rating. Please try again.");
+      }
     } else {
       alert("Please provide a rating and comment.");
     }

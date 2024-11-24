@@ -10,6 +10,7 @@ const userdetaiils = require("./routes/user");
 const booking = require("./routes/bookingroute");
 const categoryupload = require("./routes/categoryroute");
 const carouselImagesupload = require("./routes/carouselroute");
+const rat = require("./routes/ratandrev");
 
 const user = require("./routes/user");
 const path = require("path");
@@ -49,6 +50,7 @@ app.use("/carousel", carouselImagesupload);
 //user side route
 app.use("/user", user);
 app.use("/booking", booking);
+app.use("/rat", rat);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Dineease API");

@@ -50,12 +50,6 @@ const hoteldetailSchema = new Schema(
         ref: "booking",
       },
     ],
-    RatandRev: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "ratandrev",
-      },
-    ],
   },
   {
     timestamps: true,
