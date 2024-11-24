@@ -17,7 +17,7 @@ const RestaurantDetail = () => {
   const [isRatingOpen, setIsRatingOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const hotelIds = localStorage.getItem("hotelId");
+  // const hotelIds = localStorage.getItem("hotelId");
 
   const handleRateNowClick = () => {
     setIsRatingOpen(!isRatingOpen); // Toggle the visibility of the form
@@ -27,7 +27,7 @@ const RestaurantDetail = () => {
     if (rating > 0 && comment) {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}rat/hotels/${hotelIds}/ratingreview`,
+          `${import.meta.env.VITE_API}rat/${hotelId}/hotels/ratingreview`,
           {
             method: "POST",
             headers: {

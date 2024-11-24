@@ -2,11 +2,11 @@ const RatingReview = require("../modules/ratandrev"); // Correct import path
 const Hotel = require("../modules/hoteldetail");
 
 const postRatingAndReview = async (req, res) => {
-  const { hotelIds } = req.params;
+  const { hotelId } = req.params;
   const { rating, comments } = req.body;
 
   try {
-    const hotel = await Hotel.findById(hotelIds);
+    const hotel = await Hotel.findById(hotelId);
     if (!hotel) {
       return res.status(404).json({ message: "Hotel not found" });
     }
