@@ -17,6 +17,7 @@ const RestaurantDetail = () => {
   const [isRatingOpen, setIsRatingOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const clientId = localStorage.getItem("clientId");
   // const hotelIds = localStorage.getItem("hotelId");
 
   const handleRateNowClick = () => {
@@ -27,7 +28,9 @@ const RestaurantDetail = () => {
     if (rating > 0 && comment) {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API}rat/${hotelId}/hotels/ratingreview`,
+          `${
+            import.meta.env.VITE_API
+          }rat/${hotelId}/${clientId}/hotels/ratingreview`,
           {
             method: "POST",
             headers: {

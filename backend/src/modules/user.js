@@ -31,6 +31,12 @@ const userSchema = new Schema(
         ref: "hotels",
       },
     ],
+    Review: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "ratandrev",
+      },
+    ],
   },
   {
     timestamps: true,
