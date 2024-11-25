@@ -31,7 +31,7 @@ const Navbar = () => {
     { label: "Special Events", path: "/spclevents", icon: Star },
     { label: "Bookings", path: "/booking", icon: CalendarCheck },
     { label: "About Us", path: "/about", icon: Info },
-    { label: "Contact", path: "/contact", icon: Phone },
+    { label: "Contact", path: "/contactDineease", icon: Phone },
   ];
 
   // Close menu on navigation
