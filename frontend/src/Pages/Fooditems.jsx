@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { IoAddOutline } from "react-icons/io5";
-import Loader from "../components/LOader";
-
+import Loader from "../components/Loader";
 function Fooditems() {
   const [foodItems, setFoodItems] = useState([]);
   const [categories, setCategories] = useState([]);
