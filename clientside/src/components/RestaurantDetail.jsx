@@ -263,6 +263,16 @@ const RestaurantDetail = () => {
           >
             Information
           </button>
+          <button
+            className={`pb-2 px-1 ${
+              activeTab === "Review"
+                ? "border-b-2 border-blue-500 text-blue-500"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("Review")}
+          >
+            Reviews
+          </button>
         </div>
       </div>
 
@@ -362,6 +372,13 @@ const RestaurantDetail = () => {
               </ul>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* //Review section */}
+      {activeTab === "Review" && (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2>Hello Review Section</h2>
         </div>
       )}
     </div>
