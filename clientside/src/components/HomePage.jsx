@@ -198,7 +198,7 @@ const HomePage = () => {
               {/* Right Section (Image) */}
               <div className="md:w-1/2 lg:w-2/5 flex justify-center bg-transparent animate-bounceSlow">
                 <img
-                  src="../public/assets/herosectionimage1.jpg" // Add your image path here
+                  src="../assets/herosectionimage1.jpg" // Add your image path here
                   alt="Delicious Food"
                   className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300"
                 />

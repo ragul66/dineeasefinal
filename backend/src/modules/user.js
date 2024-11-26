@@ -52,4 +52,10 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+// Add a method to validate the password
+userSchema.methods.isPasswordValid = async function (enteredPassword) {
+  if (!this.password) return false; // If no password exists, return false
+  return bcrypt.compare(enteredPassword, this.password);
+};
+
 module.exports = mongoose.model("User", userSchema);
