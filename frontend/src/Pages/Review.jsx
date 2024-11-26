@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Loader from "../components/LOader";
+import Loader from "../components/Loader";
 
 const Review = () => {
   const [loading, setLoading] = useState(true);
