@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaStar, FaRegStar } from "react-icons/fa"; // Import star icons for ratings
 
 const Reviews = ({ hotelId }) => {
   const [reviews, setReviews] = useState([]);
@@ -24,24 +25,41 @@ const Reviews = ({ hotelId }) => {
 
   if (loading) return <div>Loading...</div>;
 
+  // Helper function to render stars
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        i <= rating ? (
+          <FaStar key={i} className="text-yellow-500" />
+        ) : (
+          <FaRegStar key={i} className="text-gray-300" />
+        )
+      );
+    }
+    return stars;
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
-      <h2>Reviews</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Reviews</h2>
       {reviews.length > 0 ? (
-        <ul>
+        <div className="space-y-4">
           {reviews.map((review) => (
-            <li key={review._id} className="border-b py-2">
-              <p>
-                <strong>Rating:</strong> {review.rating}
-              </p>
-              <p>
-                <strong>Comment:</strong> {review.comments}
-              </p>
-            </li>
+            <div
+              key={review._id}
+              className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center mb-2">
+                <div className="flex">{renderStars(review.rating)}</div>
+                <span className="ml-2 text-gray-600">{review.rating} / 5</span>
+              </div>
+              <p className="text-gray-700">{review.comments}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No reviews available for this hotel.</p>
+        <p className="text-gray-600">No reviews available for this hotel.</p>
       )}
     </div>
   );
