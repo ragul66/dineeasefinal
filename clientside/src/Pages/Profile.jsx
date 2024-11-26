@@ -10,6 +10,7 @@ import {
   Loader2,
   MessageSquareQuote,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -61,8 +62,17 @@ const Profile = () => {
   }
 
   const bookingStatuses = [
-    { status: "Pending Check-In", icon: Clock, color: "text-yellow-600" },
-    { status: "Pending Check-Out", icon: Calendar, color: "text-blue-600" },
+    {
+      status: "Pending Check-In",
+      icon: Clock,
+      color: "text-yellow-600",
+    },
+    {
+      status: "Pending Check-Out",
+      path: "/booking",
+      icon: Calendar,
+      color: "text-blue-600",
+    },
     { status: "Checked Out", icon: CheckCircle2, color: "text-green-600" },
   ];
 
@@ -136,8 +146,9 @@ const Profile = () => {
             </h2>
             <div className="space-y-3">
               {bookingStatuses.map((item, index) => (
-                <div
+                <Link
                   key={index}
+                  to={item.path || "#"} // Use the `path` property for navigation
                   className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex items-center">
@@ -145,7 +156,7 @@ const Profile = () => {
                     <span className="text-gray-700">{item.status}</span>
                   </div>
                   <span className="text-sm text-gray-500">Today</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
