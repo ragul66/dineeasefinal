@@ -34,7 +34,7 @@ const userSchema = new Schema(
     Review: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ratandrev",
+        ref: "RatingReview",
       },
     ],
   },

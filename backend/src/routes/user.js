@@ -62,7 +62,7 @@ router.post("/google-signin", async (req, res) => {
 });
 
 // Backend route for user login
-router.post("/login", async (req, res) => {
+router.post("/userlogin", async (req, res) => {
   try {
     const { emailid, password } = req.body;
     const user = await User.findOne({ emailid });
@@ -90,23 +90,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//get the bookings for the user
-// GET /api/bookings/:userId - Get bookings for a user
-// router.get("/bookingdetail/:clientId", async (req, res) => {
-//   const { clientId } = req.params;
-//   try {
-//     // Find the user in userDb and populate the bookings field
-//     const user = await User.findById(clientId).populate("bookings");
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res.json(user.bookings);
-//   } catch (error) {
-//     res.status(500).json({ message: "Error fetching bookings", error });
-//   }
-// });
 // GET /api/bookings/:clientId - Get bookings for a user
 router.get("/bookingdetail/:clientId", async (req, res) => {
   const { clientId } = req.params;

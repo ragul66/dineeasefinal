@@ -11,13 +11,16 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API}user/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ emailid: email, password }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API}user/userlogin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ emailid: email, password }),
+        }
+      );
 
       const data = await response.json();
 
