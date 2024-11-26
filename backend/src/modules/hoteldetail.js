@@ -41,7 +41,7 @@ const hoteldetailSchema = new Schema(
     RatandRev: [
       {
         type: Schema.Types.ObjectId,
-        ref: "ratandrev",
+        ref: "RatingReview",
       },
     ],
     booking: [
