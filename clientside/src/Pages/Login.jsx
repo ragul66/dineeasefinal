@@ -40,7 +40,7 @@ const Login = () => {
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center p-2 font-primary"
       style={{
-        backgroundImage: "url('../src/assets/Admin Back1.jpg')",
+        backgroundImage: "url('')",
       }}
     >
       <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md">
