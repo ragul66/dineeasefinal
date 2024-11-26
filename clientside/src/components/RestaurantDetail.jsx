@@ -1,5 +1,6 @@
 // Restaurant Detail Component
 import React, { useState, useEffect } from "react";
+import Reviews from "./Reviews";
 import { useNavigate } from "react-router-dom";
 import {
   FiStar as Star,
@@ -378,7 +379,7 @@ const RestaurantDetail = () => {
       {/* //Review section */}
       {activeTab === "Review" && (
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h2>Hello Review Section</h2>
+          <Reviews hotelId={hotelId} />
         </div>
       )}
     </div>

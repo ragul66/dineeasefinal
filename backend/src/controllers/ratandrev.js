@@ -41,4 +41,23 @@ const postRatingAndReview = async (req, res) => {
   }
 };
 
-module.exports = { postRatingAndReview };
+// Get reviews by hotelId
+const getReviewsByHotelId = async (req, res) => {
+  try {
+    const { hotelId } = req.params;
+
+    // Find the hotel by ID and populate the RatandRev field
+    const hotel = await Hotel.findById(hotelId).populate("RatandRev");
+
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+
+    res.status(200).json(hotel.RatandRev);
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ message: "Error fetching reviews" });
+  }
+};
+
+module.exports = { postRatingAndReview, getReviewsByHotelId };
