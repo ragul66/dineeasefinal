@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 
 const ratandrevSchema = new Schema(
   {
+    reviewername: {
+      type: String,
+    },
+    reviewermailid: {
+      type: String,
+    },
     rating: {
       type: Number,
       required: true,

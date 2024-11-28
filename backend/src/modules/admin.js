@@ -40,6 +40,12 @@ const RestaurantadminSchema = new Schema(
         ref: "fooditems",
       },
     ],
+    Reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "RatingReview",
+      },
+    ],
   },
   {
     timestamps: true,
