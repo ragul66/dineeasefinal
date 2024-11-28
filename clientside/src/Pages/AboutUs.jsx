@@ -17,7 +17,7 @@ const AboutUs = () => {
           </div>
           <div className="lg:w-1/2">
             <img
-              src="../public/assets/h1.jpg"
+              src="../assets/h1.jpg"
               alt="Dining Experience"
               className="rounded-lg shadow-lg w-full"
             />
@@ -30,7 +30,7 @@ const AboutUs = () => {
         <div className="container mx-auto flex flex-col lg:flex-row items-center max-w-6xl">
           <div className="lg:w-1/2 mb-6 lg:mb-0">
             <img
-              src="../public/assets/h2.jpg"
+              src="../assets/h2.jpg"
               alt="Our Mission"
               className="rounded-lg shadow-lg w-full"
             />
