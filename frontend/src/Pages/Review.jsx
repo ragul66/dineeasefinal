@@ -30,8 +30,11 @@ const Review = () => {
           const allReviews = data.user.hotels.flatMap((hotel) =>
             hotel.ratingsAndReviews.map((review) => ({
               hotelName: hotel.hotelName,
+              reviewername: review.reviewername,
+              reviewermailid: review.reviewermailid,
               rating: review.rating,
               comment: review.comment,
+              createdAt: review.createdAt,
             }))
           );
           setReviews(allReviews);
@@ -55,7 +58,7 @@ const Review = () => {
 
   if (error) {
     return (
-      <div className="p-8">
+      <div className="p-8 max-w-2xl mx-auto mt-10 bg-white shadow-md rounded-lg">
         <h1 className="text-2xl font-semibold text-gray-700">Error</h1>
         <p className="text-red-500 mt-2">{error}</p>
       </div>
@@ -63,25 +66,48 @@ const Review = () => {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold text-gray-700">Review Page</h1>
-      <p className="text-gray-600 mt-2">
-        User: {user.name} ({user.email})
+    <div className="p-8 max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg font-primary">
+      <h1 className="text-3xl font-semibold text-gray-800">Review Page</h1>
+      <p className="text-lg text-gray-600 mt-2">
+        User: <span className="font-bold text-gray-800">{user.name}</span> (
+        <span className="text-blue-600">{user.email}</span>)
       </p>
-      <div className="mt-4">
-        <h2 className="text-xl font-semibold text-gray-700">Reviews:</h2>
+
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold text-gray-700">Reviews:</h2>
+
         {reviews.length > 0 ? (
-          <ul className="list-disc pl-5 mt-2 text-gray-600">
+          <div className="space-y-4 mt-4">
             {reviews.map((review, index) => (
-              <li key={index}>
-                <strong>{review.hotelName}</strong> - Rating: {review.rating}{" "}
-                <br />
-                Comment: {review.comment}
-              </li>
+              <div
+                key={index}
+                className="p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-gray-800">
+                    {review.reviewername}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {review.reviewermailid}
+                  </span>
+                </div>
+                <div className="mt-2 flex items-center">
+                  <span className="text-yellow-500">
+                    {"★".repeat(review.rating)}
+                  </span>
+                  <span className="text-gray-600 ml-2">
+                    Rating: {review.rating}
+                  </span>
+                </div>
+                <p className="mt-2 text-gray-700">{review.comment}</p>
+                <span className="text-gray-400 text-xs">
+                  {new Date(review.createdAt).toLocaleDateString()}
+                </span>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
-          <p className="text-gray-600">No reviews available.</p>
+          <p className="text-gray-600 mt-4">No reviews available.</p>
         )}
       </div>
     </div>

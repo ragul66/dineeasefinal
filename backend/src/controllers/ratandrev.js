@@ -6,7 +6,7 @@ const admin = require("../modules/admin");
 const postRatingAndReview = async (req, res) => {
   const { hotelId } = req.params;
   const { clientId } = req.params;
-  const { rating, comments } = req.body;
+  const { rating, comments, reviewername, reviewermailid } = req.body;
 
   try {
     const hotel = await Hotel.findById(hotelId);
@@ -17,6 +17,8 @@ const postRatingAndReview = async (req, res) => {
     const newRatingReview = new RatingReview({
       rating,
       comments,
+      reviewername,
+      reviewermailid,
     });
 
     const User = await user.findById(clientId);
@@ -61,18 +63,18 @@ const getReviewsByHotelId = async (req, res) => {
   }
 };
 
-//for the user individual purposes purposes
+//for the user individual purposes
 const getReviewByclientId = async (req, res) => {
   const { userId } = req.params; // Extract userId from route parameters
 
   try {
-    // Fetch the user with their reviews
-    const userWithReviews = await admin
+    // Fetch the user with their reviews populated
+    const userWithReviews = await user
       .findById(userId)
-      .select("name emailid") // Select only name and email fields from the user
+      .select("name emailid") // Select only name and emailid fields from the user collection
       .populate({
-        path: "Review", // Populate the reviews
-        select: "rating comments createdAt", // Only select rating, comments, and createdAt fields from the reviews
+        path: "Review", // The field in `user` that references `ratingreview`
+        select: "reviewername reviewermailid rating comments createdAt", // Fields to include from the ratingreview documents
       });
 
     // Check if the user or reviews exist
@@ -93,10 +95,12 @@ const getReviewByclientId = async (req, res) => {
         name: userWithReviews.name,
         email: userWithReviews.emailid,
         reviews: userWithReviews.Review.map((review) => ({
+          reviewername: review.reviewername,
+          reviewermailid: review.reviewermailid,
           rating: review.rating,
           comment: review.comments,
           createdAt: review.createdAt,
-        })), // Map over the reviews to send rating, comment, and creation date
+        })), // Map over the reviews to send required fields
       },
     });
   } catch (error) {
@@ -119,7 +123,7 @@ const getUserWithHotelsAndRatings = async (req, res) => {
       path: "hotels",
       populate: {
         path: "RatandRev",
-        select: "rating comments createdAt",
+        select: "reviewername reviewermailid rating comments createdAt",
       },
     });
 
@@ -144,6 +148,8 @@ const getUserWithHotelsAndRatings = async (req, res) => {
       ratingsAndReviews:
         hotel.RatandRev.length > 0
           ? hotel.RatandRev.map((ratAndRev) => ({
+              reviewername: ratAndRev.reviewername,
+              reviewermailid: ratAndRev.reviewermailid,
               rating: ratAndRev.rating,
               comment: ratAndRev.comments,
               createdAt: ratAndRev.createdAt,

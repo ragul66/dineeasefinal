@@ -55,6 +55,11 @@ const Bookings = () => {
               className="bg-white rounded-lg shadow-md p-6 transition transform hover:scale-105 duration-300"
             >
               <div className="text-xl font-semibold mb-3">
+                <h1 className="mb-4">
+                  <span className="text-blue-600 text-2xl">
+                    {booking.bookingDetails?.hotelName}
+                  </span>
+                </h1>
                 Booking Time:{" "}
                 <span className="text-blue-600">
                   {booking.bookingDetails?.bookingTime || "N/A"}

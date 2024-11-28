@@ -20,6 +20,9 @@ const foodOrderSchema = new Schema({
 
 // Booking details schema
 const bookingDetailsSchema = new Schema({
+  hotelName: {
+    type: String,
+  },
   bookingTime: {
     type: String,
     required: true,

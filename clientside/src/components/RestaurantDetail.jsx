@@ -25,6 +25,34 @@ const RestaurantDetail = () => {
     setIsRatingOpen(!isRatingOpen); // Toggle the visibility of the form
   };
 
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const userId = localStorage.getItem("clientId");
+
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API}user/profile/${userId}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user profile");
+        }
+
+        const data = await response.json();
+        setUser(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        setLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchUserProfile();
+    }
+  }, []);
+
   const handleRatingSubmit = async () => {
     if (rating > 0 && comment) {
       try {
@@ -38,6 +66,8 @@ const RestaurantDetail = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              reviewername: user.name,
+              reviewermailid: user.emailid,
               rating: rating,
               comments: comment, // Ensure the key matches your backend schema
             }),

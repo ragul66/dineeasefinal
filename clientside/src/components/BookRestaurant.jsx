@@ -186,6 +186,7 @@ const BookHotel = () => {
         userId: userId,
         hotelId: hotelData._id, // Using hotelId instead of hotelName
         bookingDetails: {
+          hotelName: hotelData.hotelName,
           bookingTime: selectedSlot,
           guests: guestCount,
           foodOrder: foodOrder,
