@@ -8,6 +8,7 @@ import {
   Clock,
   CheckCircle2,
   Loader2,
+  Star,
   MessageSquareQuote,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -64,6 +65,7 @@ const Profile = () => {
   const bookingStatuses = [
     {
       status: "Pending Check-In",
+      path: "/booking",
       icon: Clock,
       color: "text-yellow-600",
     },
@@ -73,7 +75,18 @@ const Profile = () => {
       icon: Calendar,
       color: "text-blue-600",
     },
-    { status: "Checked Out", icon: CheckCircle2, color: "text-green-600" },
+    {
+      status: "Checked Out",
+      path: "#",
+      icon: CheckCircle2,
+      color: "text-green-600",
+    },
+    {
+      status: "Your reviews",
+      path: "/profile/reviews",
+      icon: Star,
+      color: "text-green-600",
+    },
   ];
 
   return (

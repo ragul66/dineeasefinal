@@ -16,6 +16,7 @@ import BookRestaurant from "./components/BookRestaurant";
 import Profile from "./Pages/Profile";
 import SpecialEvents from "./Pages/SpecialEvents";
 import ContactPage from "./Pages/ContactPage";
+import ProfileReview from "./components/ProfileReview";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/contactDineease",
         element: <ContactPage />,
+      },
+      {
+        path: "/profile/reviews",
+        element: <ProfileReview />,
       },
     ],
   },
