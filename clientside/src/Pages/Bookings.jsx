@@ -43,7 +43,7 @@ const Bookings = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto mt-20">
+    <div className="p-6 max-w-4xl mx-auto mt-20 font-primary">
       <h1 className="text-xl md:text-3xl font-extrabold text-gray-800 mb-6">
         My Bookings
       </h1>
@@ -88,11 +88,11 @@ const Bookings = () => {
               </div>
               <button
                 onClick={() => handleCancelBooking(booking._id)}
-                className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
+                className="mt-4 bg-red-600 text-white px-2 py-1  md:px-4 md:py-2 rounded-lg hover:bg-red-700 transition duration-300"
               >
                 Cancel Booking
               </button>
-              <p className="text-red-600 mt-2">
+              <p className="text-red-600 mt-2 text-sm">
                 Note:Cancel Booking Before 1Hour
               </p>
             </div>

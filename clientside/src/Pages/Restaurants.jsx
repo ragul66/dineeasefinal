@@ -7,7 +7,7 @@ const RestaurantCard = ({ hotel }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="grid gap-4  ">
+    <div className="grid   md:grid-cols-3 md:w-[1300px]">
       <div
         onClick={() => navigate(`/restaurantdetails/${hotel._id}`)}
         className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transition-transform hover:scale-105 animate-fadeIn"
